@@ -1,0 +1,308 @@
+/* Calendar Styles - Themed to match your design */
+.booking-calendar {
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem; /* Increased to match your card style */
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05); /* Subtle shadow like your cards */
+  transition: all 0.3s ease; /* Matching your card transition */
+  padding-bottom: 30px; /* Add space for the labels */
+}
+
+.booking-calendar:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Matching your card hover effect */
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  background-color: var(--primary-green);
+  color: green;
+  font-family: "Poppins", sans-serif; /* Matching your body font */
+}
+
+.calendar-header div {
+  padding: 0.75rem 0.25rem; /* Slightly increased padding */
+  font-size: 0.9rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background-color: #dee2e6;
+}
+
+.day {
+  padding: 1rem 0.25rem; /* Increased padding for better proportions */
+  text-align: center;
+  background-color: #fff;
+  cursor: pointer;
+  min-height: 60px; /* Increased height for better touch targets */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  position: relative;
+  transition: all 0.3s ease; /* Matching your card transition */
+  font-family: "Poppins", sans-serif; /* Consistent typography */
+}
+
+/* Hover effect for available dates in range selection */
+.day.available:not(.not-current-month):hover,
+.day.in-range-hover:not(.not-current-month) {
+  background-color: #ffcccc; /* Light red for hover */
+  color: #721c24; /* Dark red text */
+  transform: scale(1.05); /* Subtle zoom effect on hover */
+  z-index: 1; /* Bring hovered element forward */
+}
+
+.day.not-current-month {
+  color: #aaa;
+  background-color: #f8f9fa;
+  cursor: default;
+}
+
+.day.booked:not(.not-current-month) {
+  background-color: #f8d7da;
+  color: #721c24;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.day.selected-range:not(.not-current-month):not(.booked) {
+  background-color: #d4edda; /* Lighter green for selected range */
+  color: #155724; /* Dark green text */
+}
+
+.day.check-in:not(.not-current-month):not(.booked) {
+  border-top-left-radius: 50px;
+  border-bottom-left-radius: 50px;
+}
+.day.check-out:not(.not-current-month):not(.booked) {
+  border-top-right-radius: 50px;
+  border-bottom-right-radius: 50px;
+}
+/* For single day selection */
+.day.check-in.check-out:not(.not-current-month):not(.booked) {
+  border-radius: 50px;
+}
+
+/* Add arrow indicators for better UX */
+.day.check-in:not(.not-current-month):not(.booked)::after {
+  content: "Check-in";
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.6rem;
+  white-space: nowrap;
+  color: #28a745;
+  font-weight: bold;
+}
+
+.day.check-out:not(.not-current-month):not(.booked)::after {
+  content: "Check-out";
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.6rem;
+  white-space: nowrap;
+  color: #dc3545;
+  font-weight: bold;
+}
+
+.day.check-in {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.day.check-out {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.day.selected-range.check-in,
+.day.selected-range.check-out {
+  border-radius: 4px;
+}
+
+.day.past-date:not(.not-current-month) {
+  color: #6c757d;
+  background-color: #e9ecef;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+/* Enhanced Legend Styles */
+.calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem; /* Increased gap for better spacing */
+  font-size: 0.9rem; /* Slightly larger text */
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: var(--light-green);
+  border-radius: 0.5rem; /* Matching card radius */
+}
+
+.calendar-legend > div {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.legend-box {
+  width: 20px; /* Slightly larger */
+  height: 20px; /* Slightly larger */
+  display: inline-block;
+  margin-right: 8px; /* Increased spacing */
+  border: 1px solid #ccc;
+  border-radius: 4px; /* Slightly more rounded */
+  transition: all 0.3s ease; /* Matching theme transitions */
+}
+
+.available-legend {
+  background-color: #fff;
+  border-color: var(--light-green);
+}
+
+.booked-legend {
+  background-color: #f8d7da;
+}
+
+.selected-legend {
+  background-color: #d4edda;
+}
+
+.check-in-legend {
+  background-color: #28a745;
+}
+
+.check-out-legend {
+  background-color: #dc3545;
+}
+
+.past-legend {
+  background-color: #e9ecef;
+}
+
+.hover-range-legend {
+  background-color: #ffcccc; /* Matching the hover color */
+  border-color: #ff9999;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .calendar-header div {
+    padding: 0.5rem 0.1rem;
+    font-size: 0.8rem;
+  }
+
+  .day {
+    padding: 0.5rem 0.1rem;
+    min-height: 45px;
+    font-size: 0.8rem;
+  }
+
+  .calendar-legend {
+    gap: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .legend-box {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+
+/* Add to your component's CSS */
+.notification-container {
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  margin-bottom: 10px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animation for the success checkmark */
+.bi-check-circle-fill {
+  animation: checkmark 0.5s ease-out;
+}
+
+@keyframes checkmark {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* WhatsApp floating button styles */
+.whatsapp-float {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  z-index: 100;
+}
+
+.whatsapp-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 60px;
+  height: 60px;
+  background-color: #25d366;
+  color: white;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 30px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
+}
+
+.whatsapp-link:hover {
+  background-color: #128c7e;
+  color: white;
+  transform: scale(1.1);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+@media (max-width: 576px) {
+  .whatsapp-float {
+    bottom: 20px;
+    right: 20px;
+  }
+
+  .whatsapp-link {
+    width: 50px;
+    height: 50px;
+    font-size: 25px;
+  }
+}

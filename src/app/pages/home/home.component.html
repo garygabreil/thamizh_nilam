@@ -1,0 +1,1076 @@
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+  <div class="container">
+    <a class="navbar-brand" href="#">
+      <div class="d-flex align-items-center">
+        <!-- Leaf Icon -->
+        <div class="leaf-icon me-2">
+          <svg width="40" height="40" viewBox="0 0 100 100">
+            <circle cx="50" cy="50" r="45" fill="#2e8b57" fill-opacity="0.1" />
+            <path
+              d="M50,20 C70,10 85,40 50,90 C15,40 30,10 50,20 Z"
+              fill="#2e8b57"
+            />
+            <path
+              d="M50,20 L50,90 M50,50 L60,40 M50,50 L40,40 M50,60 L60,55 M50,60 L40,55"
+              stroke="#e8f5e9"
+              stroke-width="3"
+              stroke-linecap="round"
+            />
+          </svg>
+        </div>
+        <!-- Text Logo - Hidden on small screens -->
+        <span class="brand-text text-success fw-bold">Thamizh Nilam</span>
+      </div>
+    </a>
+
+    <button
+      class="navbar-toggler border-0"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarContent"
+      aria-controls="navbarContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link text-success fw-bolder px-3 py-2" href="#about"
+            >About</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-success fw-bolder px-3 py-2" href="#trees"
+            >Trees & Produce</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-success fw-bolder px-3 py-2" href="#visit"
+            >Visit</a
+          >
+        </li>
+        <li class="nav-item">
+          <a
+            class="nav-link text-success fw-bolder px-3 py-2"
+            href="#achievements"
+            >Achievements</a
+          >
+        </li>
+        <li class="nav-item">
+          <a class="nav-link text-success fw-bolder px-3 py-2" href="#contact"
+            >Contact</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero Video Section - Updated Layout -->
+<section class="hero-section">
+  <app-hero-video></app-hero-video>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <h1 class="fw-bolder">Welcome to Thamizh Nilam</h1>
+    <p class="fw-bolder text-muted">
+      Experience the beauty of sustainable farming in Tamil Nadu
+    </p>
+    <button href="#about" class="btn btn-outline-success fw-bolder btn-lg">
+      Explore Our Farm
+    </button>
+  </div>
+</section>
+<!-- About Us -->
+<section
+  id="about"
+  class="py-5 bg-white"
+  style="
+    --bs-bg-opacity: 1;
+    background-color: rgba(
+      var(--bs-light-rgb),
+      var(--bs-bg-opacity)
+    ) !important;
+  "
+>
+  <div class="container">
+    <!-- Animated Title -->
+    <h2 class="text-center text-success mb-5 section-title fw-bolder">
+      Our Story
+    </h2>
+
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6 order-lg-1 order-2">
+        <!-- Animated Text Content -->
+        <div class="animate__animated animate__fadeIn animate__delay-1s">
+          <p class="lead mb-4 text-muted fw-bolder">
+            <strong class="text-success">"Thamizh Nilam Thamizh Pannai"</strong>
+            is a food forest sprawling across 15 acres near Mamallapuram. This
+            forest boasts over 16,000 trees representing more than 350 species.
+            Planted 12 years ago, these trees have now reached impressive
+            heights of up to 60 feet.
+          </p>
+          <p class="mb-4 fw-bolder text-muted">
+            This forest is expertly crafted to merge agriculture with tourism,
+            offering visitors an enriching, educational, and immersive
+            experience that narrows the divide between urban and rural farming
+            practices.
+          </p>
+        </div>
+
+        <!-- Animated Cards -->
+        <div class="row mt-4 g-4">
+          <div
+            class="col-md-6 animate__animated animate__fadeInLeft animate__delay-2s"
+          >
+            <div
+              class="card h-100 border-0 shadow-sm highlight-card hover-effect"
+            >
+              <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                  <i class="bi bi-sun text-success me-3 fs-4"></i>
+                  <h5 class="mb-0 fw-bolder text-success">Unique Ecosystem</h5>
+                </div>
+                <p class="mb-0 fw-bolder text-muted">
+                  Only 20% of ground gets sunlight, with 80% in shade. Tree
+                  leaves create a dense layer up to a foot high.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-md-6 animate__animated animate__fadeInRight animate__delay-2s"
+          >
+            <div
+              class="card h-100 border-0 shadow-sm highlight-card hover-effect"
+            >
+              <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                  <i class="bi bi-thermometer-snow text-success me-3 fs-4"></i>
+                  <h5 class="mb-0 fw-bolder text-success">Natural Cooling</h5>
+                </div>
+                <p class="mb-0 fw-bolder text-muted">
+                  Temperature inside is 3-4°C cooler than outside. Pristine air
+                  quality with lichen flourishing on all trees.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-md-6 animate__animated animate__fadeInLeft animate__delay-3s"
+          >
+            <div
+              class="card h-100 border-0 shadow-sm highlight-card hover-effect"
+            >
+              <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                  <i class="bi bi-bug text-success me-3 fs-4"></i>
+                  <h5 class="mb-0 fw-bolder text-success">Rich Biodiversity</h5>
+                </div>
+                <p class="mb-0 fw-bolder text-muted">
+                  Abundance of earthworms throughout the farm, indicating
+                  healthy soil ecosystem.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div
+            class="col-md-6 animate__animated animate__fadeInRight animate__delay-3s"
+          >
+            <div
+              class="card h-100 border-0 shadow-sm highlight-card hover-effect"
+            >
+              <div class="card-body">
+                <div class="d-flex align-items-center mb-3">
+                  <i class="bi bi-globe text-success me-3 fs-4"></i>
+                  <h5 class="mb-0 fw-bolder text-success">Climate Solution</h5>
+                </div>
+                <p class="mb-0 fw-bolder text-muted">
+                  Leading the way in combating global climate change through
+                  sustainable practices.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Image Gallery with Animation -->
+      <div class="col-lg-6 order-lg-2 order-1">
+        <div
+          class="ratio ratio-16x9 shadow-lg rounded overflow-hidden mb-4 animate__animated animate__fadeIn"
+        >
+          <img
+            src="../../../assets/founder_image.JPG"
+            class="img-fluid zoom-effect"
+            alt="Organic Farm"
+          />
+        </div>
+        <div class="row g-3">
+          <div class="col-6 animate__animated animate__fadeInLeft">
+            <img
+              src="../../../assets/farm_gallary_1.JPG"
+              class="img-fluid rounded shadow-sm zoom-effect"
+              alt="Farm view"
+            />
+          </div>
+          <div class="col-6 animate__animated animate__fadeInRight">
+            <img
+              src="../../../assets/farm_gallary_2.JPG"
+              class="img-fluid rounded shadow-sm zoom-effect"
+              alt="Farm trees"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Founder Section with Animation -->
+    <div class="row mt-5 align-items-center g-5">
+      <div class="col-lg-4 animate__animated animate__fadeInLeft">
+        <div class="founder-image-container">
+          <img
+            src="../../../assets/founder_image_2.jpg"
+            class="img-fluid rounded shadow-lg zoom-effect"
+            alt="Founder"
+          />
+        </div>
+      </div>
+      <div class="col-lg-8 animate__animated animate__fadeInRight">
+        <h3 class="text-success fw-bolder mb-4">Meet the Visionary</h3>
+        <p class="text-muted fw-bolder">
+          This lush forest was brought to life by
+          <strong class="text-success fw-bolder">Mr. V. Deivasigamani</strong>,
+          also affectionately known as
+          <strong class="text-success fw-bolder">Iraiazhagan</strong>, a
+          68-year-old Mechanical Engineer. Hailing from a traditional farming
+          family, he has been engaged in farming since his childhood.
+        </p>
+        <p class="text-muted fw-bolder">
+          Inspired by his meeting with
+          <strong class="text-success fw-bolder">Nammazhvar</strong>, an
+          esteemed Indian Green Crusader, he decided to devote himself entirely
+          to farming, integrating agriculture with tourism to captivate visitors
+          and spread awareness.
+        </p>
+        <div class="d-flex align-items-center mt-4 quote-animation">
+          <i class="bi bi-quote fs-1 text-success me-3"></i>
+          <blockquote class="blockquote mb-0">
+            <p class="fst-italic text-muted fw-bolder">
+              "Farming is not just a profession, it's a way of life that
+              connects us to our roots and to nature."
+            </p>
+            <footer class="blockquote-footer text-success fw-bolder">
+              Mr. V. Deivasigamani
+            </footer>
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Achievements -->
+<section id="achievements" class="py-5 bg-light">
+  <div class="container">
+    <h2 class="text-center text-success fw-boldermb-5 section-title">
+      Achievements & Recognitions
+    </h2>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm highlight-card">
+          <div class="card-body text-center p-4">
+            <div
+              class="icon-box bg-success bg-opacity-10 text-success rounded-circle mx-auto"
+            >
+              <i class="bi bi-award fs-4"></i>
+            </div>
+            <h5 class="mt-3 mb-3 text-success fw-bolder">Best Organic Farm</h5>
+            <p class="mb-0 text-muted fw-bolder">
+              Awarded as "Best Organic Farm in Chengalpet" by Chengalpet
+              District Collector
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm highlight-card">
+          <div class="card-body text-center p-4">
+            <div
+              class="icon-box bg-success bg-opacity-10 text-success rounded-circle mx-auto"
+            >
+              <i class="bi bi-trophy fs-4"></i>
+            </div>
+            <h5 class="mt-3 mb-3 text-success fw-bolder">Mannin Kural Award</h5>
+            <p class="mb-0 text-muted fw-bolder">
+              Received from Raindrops organization for environmental
+              conservation
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm highlight-card">
+          <div class="card-body text-center p-4">
+            <div
+              class="icon-box bg-success bg-opacity-10 text-success rounded-circle mx-auto"
+            >
+              <i class="bi bi-star fs-4"></i>
+            </div>
+            <h5 class="mt-3 mb-3 text-success fw-bolder">Nammazhvar Award</h5>
+            <p class="mb-0 text-muted fw-bolder">
+              Received "Iyarkai Velan Vinyani Nammazhvar" award 2022 from TEDE
+              trust
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm highlight-card">
+          <div class="card-body text-center p-4">
+            <div
+              class="icon-box bg-success bg-opacity-10 text-success rounded-circle mx-auto"
+            >
+              <i class="bi bi-tree fs-4"></i>
+            </div>
+            <h5 class="mt-3 mb-3 text-success fw-bolder">
+              Environmental Award
+            </h5>
+            <p class="mb-0 text-muted fw-bolder">
+              From Thaithamizh School, Thirupur for sustainable farming
+              practices
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 border-0 shadow-sm highlight-card">
+          <div class="card-body text-center p-4">
+            <div
+              class="icon-box bg-success bg-opacity-10 text-success rounded-circle mx-auto"
+            >
+              <i class="bi bi-people fs-4"></i>
+            </div>
+            <h5 class="mt-3 mb-3 text-success fw-bolder">Rotary Club Award</h5>
+            <p class="mb-0 text-muted fw-bolder">
+              "Sei Thozhil" special award from Rotary Club for community service
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Trees and Produce -->
+<section id="trees" class="py-5 bg-white">
+  <div class="container">
+    <h2 class="text-center text-success mb-5 section-title">
+      Our Trees & Produce
+    </h2>
+
+    <div class="row mb-5">
+      <div class="col-lg-6 mb-4 mb-lg-0">
+        <h3 class="text-success mb-4 fw-bolder">Tree Varieties</h3>
+        <p class="text-muted fw-bolder">
+          Our forest has evolved to include a diverse array of timber trees,
+          such as
+          <strong class="text-success fw-bolder"
+            >Vengai (Indian Kino), Marudham, Eeti (Rosewood), Redwood,
+            Sandalwood, Kadambam, and teak</strong
+          >, along with a selection of rare species like
+          <strong class="text-success fw-bolder"
+            >Purasu, Thadasu, Paathiri, Devatharu, Naruvizhi, Kusurukki,
+            Kurinji, and Ichi (Indian Laurel Fig)</strong
+          >.
+        </p>
+        <p class="text-muted fw-bolder">
+          We focus exclusively on cultivating native and traditional seeds and
+          crops, adhering to time-honored farming practices such as ploughing
+          fields with bullocks and regularly rotating crops. Our farm is
+          protected with a three-layer live fence composed of
+          Timber-Bamboo-Timber.
+        </p>
+      </div>
+      <div class="col-lg-6">
+        <div class="ratio ratio-16x9 shadow-lg rounded overflow-hidden">
+          <img
+            src="https://images.unsplash.com/photo-1466692476868-aef1dfb1e735?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+            class="img-fluid"
+            alt="Tree varieties"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+
+    <h3 class="text-success mb-4 text-center mb-3 fw-bolder">
+      Organic Practices
+    </h3>
+    <p class="text-center text-muted fw-bolder mb-5">
+      We are committed to sustainable agriculture by employing a range of
+      organic practices on our farm.
+    </p>
+
+    <div class="row g-4 mb-5">
+      <div class="col-md-6 col-lg-3">
+        <div
+          class="card h-100 border-0 shadow-sm text-center p-4 highlight-card"
+        >
+          <div
+            class="icon-box bg-success bg-opacity-10 text-success rounded-circle mx-auto"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              viewBox="0 0 64 64"
+              fill="none"
+            >
+              <!-- Ox Body -->
+              <rect
+                x="10"
+                y="28"
+                width="18"
+                height="12"
+                rx="4"
+                fill="#795548"
+              />
+              <!-- Plough Handle -->
+              <line
+                x1="28"
+                y1="32"
+                x2="50"
+                y2="18"
+                stroke="#8B4513"
+                stroke-width="4"
+              />
+              <!-- Plough Blade -->
+              <path d="M50 18 L56 26 L52 28 L48 24 Z" fill="#A0522D" />
+              <!-- Ground -->
+              <rect y="48" width="64" height="8" rx="4" fill="#6c757d" />
+            </svg>
+          </div>
+          <h5 class="mt-3 mb-3 text-success fw-bolder">Ploughing</h5>
+          <p class="mb-0 text-muted fw-bolder">
+            Turning and aerating the soil, preparing it for planting to improve
+            soil structure
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div
+          class="card h-100 border-0 shadow-sm text-center p-4 highlight-card"
+        >
+          <div
+            class="icon-box bg-success bg-opacity-10 text-success rounded-circle mx-auto"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              viewBox="0 0 64 64"
+              fill="none"
+            >
+              <!-- Jug -->
+              <rect
+                x="10"
+                y="20"
+                width="20"
+                height="18"
+                rx="3"
+                fill="#6c757d"
+              />
+              <rect x="5" y="25" width="10" height="4" fill="#495057" />
+              <!-- Handle -->
+              <path
+                d="M30 22 C35 18, 35 40, 30 38"
+                stroke="#343a40"
+                stroke-width="2"
+                fill="none"
+              />
+              <!-- Liquid drops -->
+              <path d="M32 38 C34 42, 36 44, 34 46" fill="#198754" />
+              <path d="M36 40 C38 44, 40 46, 38 48" fill="#198754" />
+            </svg>
+          </div>
+          <h5 class="mt-3 mb-3 text-success fw-bolder">Organic Inputs</h5>
+          <p class="mb-0 text-muted fw-bolder">
+            Producing Panchakavya, Meen Amilam, and Jeevamirtham for natural
+            fertilization
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div
+          class="card h-100 border-0 shadow-sm text-center p-4 highlight-card"
+        >
+          <div
+            class="icon-box bg-success bg-opacity-10 text-success rounded-circle mx-auto"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              fill="currentColor"
+              class="text-success"
+              viewBox="0 0 64 64"
+            >
+              <!-- Soil -->
+              <rect y="48" width="64" height="8" rx="4" ry="4" fill="#6c757d" />
+
+              <!-- Seed -->
+              <ellipse cx="32" cy="40" rx="4" ry="6" fill="#8B4513" />
+
+              <!-- Sprout stem -->
+              <path
+                d="M32 40 C32 30, 30 28, 28 26"
+                stroke="#228B22"
+                stroke-width="2"
+                fill="none"
+              />
+
+              <!-- Sprout leaf left -->
+              <path
+                d="M27 25 C25 23, 23 24, 24 26 C25 28, 27 27, 27 25 Z"
+                fill="#28a745"
+              />
+
+              <!-- Sprout leaf right -->
+              <path
+                d="M29 25 C31 23, 33 24, 32 26 C31 28, 29 27, 29 25 Z"
+                fill="#28a745"
+              />
+            </svg>
+          </div>
+          <h5 class="mt-3 mb-3 text-success fw-bolder">Seeding</h5>
+          <p class="mb-0 text-muted fw-bolder">
+            Carefully selected native seeds sown for optimal growth and yield
+          </p>
+        </div>
+      </div>
+      <div class="col-md-6 col-lg-3">
+        <div
+          class="card h-100 border-0 shadow-sm text-center p-4 highlight-card"
+        >
+          <div
+            class="icon-box bg-success bg-opacity-10 text-success rounded-circle mx-auto"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              width="48"
+              height="48"
+              viewBox="0 0 64 64"
+              fill="none"
+            >
+              <!-- Soil -->
+              <rect y="48" width="64" height="8" rx="4" fill="#6c757d" />
+              <!-- Organic Layer -->
+              <path
+                d="M0 44 C10 40, 20 40, 32 44 C44 48, 54 44, 64 44 L64 48 H0 Z"
+                fill="#a0522d"
+              />
+              <!-- Leaves on top -->
+              <circle cx="16" cy="40" r="4" fill="#28a745" />
+              <circle cx="24" cy="42" r="3" fill="#28a745" />
+              <circle cx="40" cy="40" r="4" fill="#28a745" />
+              <circle cx="48" cy="42" r="3" fill="#28a745" />
+            </svg>
+          </div>
+          <h5 class="mt-3 mb-3 text-success fw-bolder">Mulching</h5>
+          <p class="mb-0 text-muted fw-bolder">
+            Covering soil with organic material to retain moisture and enrich
+            soil
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="text-success fw-bolder mb-4 text-center">Seasonal Produce</h3>
+    <p class="text-center text-muted fw-bolder mb-5">
+      Grown with care, harvested with love
+    </p>
+
+    <div class="row g-4 justify-content-center">
+      <!-- Fruits -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-img-top overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+              class="tree-card-img img-fluid w-100"
+              alt="Local Fruits"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title text-success mb-3 fw-bolder">Local Fruits</h5>
+            <p class="card-text text-muted fw-bold">
+              Papaya, Chikku, Guava, Amla, Water Apple,<br class="d-md-none" />
+              Fig, Lemon, Jackfruit, Banana,<br class="d-md-none" />
+              Mangoes, Mosambi, and Custard Apple
+            </p>
+          </div>
+          <div class="card-footer bg-transparent border-top-0">
+            <div class="d-flex justify-content-center gap-2">
+              <span
+                class="badge rounded-pill bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3 py-2"
+              >
+                <i class="bi bi-check-circle-fill me-1"></i> Organic
+              </span>
+              <span
+                class="badge rounded-pill bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3 py-2"
+              >
+                <i class="bi bi-check-circle-fill me-1"></i> Seasonal
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Vegetables -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-img-top overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1598170845058-32b9d6a5da37?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+              class="tree-card-img img-fluid w-100"
+              alt="Vegetables"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title text-success mb-3 fw-bolder">Vegetables</h5>
+            <p class="card-text text-muted fw-bold">
+              Brinjal, Ladies Finger, Chillies, Snake Gourd, Siraghu Avarai,
+              <br class="d-md-none" />
+              Tapioca, Turkey Berry, and more<br class="d-md-none" />
+            </p>
+            <p class="card-text"></p>
+          </div>
+          <div class="card-footer bg-transparent border-top-0">
+            <div class="d-flex justify-content-center gap-2">
+              <span
+                class="badge rounded-pill bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3 py-2"
+              >
+                <i class="bi bi-check-circle-fill me-1"></i> Organic
+              </span>
+              <span
+                class="badge rounded-pill bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3 py-2"
+              >
+                <i class="bi bi-check-circle-fill me-1"></i> Pesticide-free
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Processed Products -->
+      <div class="col-md-6 col-lg-4">
+        <div class="card h-100 shadow-sm">
+          <div class="card-img-top overflow-hidden">
+            <img
+              src="https://images.unsplash.com/photo-1603569283847-aa295f0d016a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+              class="tree-card-img img-fluid w-100"
+              alt="Processed Products"
+              loading="lazy"
+            />
+          </div>
+          <div class="card-body text-center">
+            <h5 class="card-title text-success mb-3 fw-bolder">
+              Processed Products
+            </h5>
+            <p class="card-text text-muted fw-bold">
+              Cold-pressed oils (coconut, groundnut, sesame), Turmeric Powder,
+
+              <br class="d-md-none" />
+              Tapioca, Turkey Berry, and more<br class="d-md-none" />
+            </p>
+            <p class="card-text"></p>
+          </div>
+          <div class="card-footer bg-transparent border-top-0">
+            <div class="d-flex justify-content-center gap-2">
+              <span
+                class="badge rounded-pill bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3 py-2"
+              >
+                <i class="bi bi-check-circle-fill me-1"></i> Traditional
+              </span>
+              <span
+                class="badge rounded-pill bg-success bg-opacity-10 text-success border border-success border-opacity-25 px-3 py-2"
+              >
+                <i class="bi bi-check-circle-fill me-1"></i> Chemical-free
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Visit Us -->
+<section
+  id="visit"
+  class="py-5"
+  style="
+    --bs-bg-opacity: 1;
+    background-color: rgba(
+      var(--bs-light-rgb),
+      var(--bs-bg-opacity)
+    ) !important;
+  "
+>
+  <div class="container">
+    <h2 class="text-center text-success mb-5 section-title">
+      Farm Experiences
+    </h2>
+    <div class="row g-4 justify-content-center">
+      <div class="col-md-6 col-lg-3">
+        <div
+          class="card h-100 border-0 shadow-sm text-center p-4 highlight-card"
+        >
+          <div
+            class="icon-box bg-success bg-opacity-10 text-success rounded-circle mx-auto"
+          >
+            <i class="bi bi-house-door fs-4"></i>
+          </div>
+          <h5 class="card-title text-success fw-bolder">Farm Stay</h5>
+          <p class="card-text text-muted fw-bolder">
+            Experience authentic rural life with our comfortable farmstay
+            accommodations.
+          </p>
+          <button
+            type="button"
+            style="background-color: green"
+            class="btn btn-success"
+            routerLink="/farm-stay"
+          >
+            Book Now
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div
+          class="card h-100 border-0 shadow-sm text-center p-4 highlight-card"
+        >
+          <div
+            class="icon-box bg-success bg-opacity-10 text-success rounded-circle mx-auto"
+          >
+            <i class="bi bi-camera fs-4"></i>
+          </div>
+          <h5 class="card-title text-success fw-bolder">Photo Shoots</h5>
+          <p class="card-text text-muted fw-bolder">
+            Beautiful natural backdrops for pre-wedding, family, and portfolio
+            shoots.
+          </p>
+          <button
+            type="button"
+            style="background-color: green"
+            class="btn btn-success"
+            routerLink="/photoshoots"
+          >
+            Book Now
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div
+          class="card h-100 border-0 shadow-sm text-center p-4 highlight-card"
+        >
+          <div
+            class="icon-box bg-success bg-opacity-10 text-success rounded-circle mx-auto"
+          >
+            <i class="bi bi-mortarboard fs-4"></i>
+          </div>
+          <h5 class="card-title text-success fw-bolder">Farm Visit</h5>
+          <p class="card-text text-muted fw-bolder">
+            Learn organic farming, composting, and traditional agricultural
+            techniques.
+          </p>
+          <button
+            type="button"
+            style="background-color: green"
+            class="btn btn-success"
+            routerLink="/farm-visit"
+          >
+            Book Now
+          </button>
+        </div>
+      </div>
+
+      <div class="col-md-6 col-lg-3">
+        <div
+          class="card h-100 border-0 shadow-sm text-center p-4 highlight-card"
+        >
+          <div
+            class="icon-box bg-success bg-opacity-10 text-success rounded-circle mx-auto"
+          >
+            <i class="bi bi-people fs-4"></i>
+          </div>
+          <h5 class="card-title text-success fw-bolder">School Trips</h5>
+          <p class="card-text text-muted fw-bolder">
+            Educational farm tours designed specially for school children.
+          </p>
+          <br />
+          <button
+            type="button"
+            style="background-color: green"
+            class="btn btn-success"
+            routerLink="/school-trips"
+          >
+            Book Now
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- farm-gallery.component.html -->
+    <div class="container-fluid py-5 bg-light">
+      <!-- Gallery Grid -->
+      <div class="container-fluid py-5 bg-light">
+        <div class="container">
+          <h2 class="text-center text-success fw-bold mb-5 display-5">
+            Farm Gallery
+          </h2>
+
+          <!-- Filter Controls -->
+          <div class="d-flex justify-content-center flex-wrap mb-5">
+            <button
+              *ngFor="let filter of filters"
+              class="btn btn-outline-success mx-2 mb-2 rounded-pill px-4"
+              [class.active]="activeFilter === filter.value"
+              (click)="filterImages(filter.value)"
+            >
+              {{ filter.label }}
+            </button>
+          </div>
+
+          <!-- Gallery Grid with consistent image sizing -->
+          <div class="row g-4">
+            <div
+              class="col-md-6 col-lg-4 col-xl-3"
+              *ngFor="let image of filteredImages; let i = index"
+            >
+              <div
+                class="card h-100 border-0 shadow-sm overflow-hidden gallery-card"
+                [class.landscape]="image.type === 'landscape'"
+                [class.portrait]="image.type === 'portrait'"
+                (click)="openLightbox(i)"
+              >
+                <div class="image-container">
+                  <img
+                    [src]="image.src"
+                    class="gallery-image"
+                    [alt]="image.alt"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="card-img-overlay d-flex align-items-end p-0">
+                  <div
+                    class="bg-success bg-opacity-75 text-white w-100 py-2 text-center"
+                  >
+                    <span class="fw-bold">{{
+                      image.category | titlecase
+                    }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Lightbox Modal -->
+          <div
+            class="modal fade"
+            [class.show]="lightboxActive"
+            [style.display]="lightboxActive ? 'block' : 'none'"
+          >
+            <div class="modal-dialog modal-dialog-centered modal-xl">
+              <div class="modal-content border-0 bg-transparent">
+                <div class="modal-header border-0">
+                  <button
+                    type="button"
+                    class="btn-close btn-close-white"
+                    (click)="closeLightbox()"
+                  ></button>
+                </div>
+                <div class="modal-body text-center">
+                  <img
+                    [src]="farmImages[activeIndex].src"
+                    class="img-fluid rounded shadow"
+                    [alt]="farmImages[activeIndex].alt"
+                    style="max-height: 70vh; object-fit: contain"
+                  />
+                </div>
+                <div class="modal-footer border-0 justify-content-between">
+                  <button
+                    class="btn btn-success rounded-circle"
+                    (click)="prevImage()"
+                  >
+                    <i class="bi bi-chevron-left"></i>
+                  </button>
+                  <span class="text-white fw-bold"
+                    >{{ activeIndex + 1 }} / {{ farmImages.length }}</span
+                  >
+                  <button
+                    class="btn btn-success rounded-circle"
+                    (click)="nextImage()"
+                  >
+                    <i class="bi bi-chevron-right"></i>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="py-5 bg-white">
+  <app-feedback-combined-carousel
+    [collectionNames]="[
+      'farm-stay-feedbacks',
+      'farm-visit-feedbacks',
+      'photoshoot-feedbacks',
+      'school-trip-feedbacks'
+    ]"
+    [titles]="['Farm-Stay', 'Farm-Visit', 'Photoshoots', 'School-Trips']"
+    combinedTitle="Visitor's Feedbacks"
+  >
+  </app-feedback-combined-carousel>
+</section>
+
+<section id="contact" class="py-5 bg-light">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-10">
+        <h2 class="text-center text-success fw-bolder mb-5 section-title">
+          Get In Touch
+        </h2>
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <p class="lead mb-4 text-muted fw-bolder">
+              Ready to visit or have questions about our farm?
+            </p>
+            <div class="row g-4 justify-content-center">
+              <div class="col-md-4">
+                <div class="d-flex flex-column align-items-center mb-4">
+                  <div
+                    class="icon-box bg-success bg-opacity-10 text-success rounded-circle mb-3"
+                  >
+                    <i class="bi bi-geo-alt fs-5"></i>
+                  </div>
+                  <div>
+                    <h5 class="mb-1 text-success fw-bolder">Location</h5>
+                    <p class="mb-0 text-muted fw-bolder">
+                      Near Mamallapuram, Tamil Nadu, India
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="d-flex flex-column align-items-center mb-4">
+                  <div
+                    class="icon-box bg-success bg-opacity-10 text-success rounded-circle mb-3"
+                  >
+                    <i class="bi bi-envelope fs-5"></i>
+                  </div>
+                  <div>
+                    <h5 class="mb-1 text-success fw-bolder">Email</h5>
+                    <p class="mb-0 text-muted fw-bolder">
+                      contact&#64;thamizhnilam.com
+                    </p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="d-flex flex-column align-items-center">
+                  <div
+                    class="icon-box bg-success bg-opacity-10 text-success rounded-circle mb-3"
+                  >
+                    <i class="bi bi-telephone fs-5"></i>
+                  </div>
+                  <div>
+                    <h5 class="mb-1 fw-bolder text-success">Phone</h5>
+                    <p class="mb-0 text-muted fw-bolder">+91 98765 43210</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-5">
+              <h5 class="text-success mb-3 fw-bolder">
+                <u> Farm Hours </u>
+              </h5>
+              <ul class="list-unstyled">
+                <li class="mb-2">
+                  <strong class="text-muted">Monday-Saturday:</strong>
+                  8:00 AM - 6:00 PM
+                </li>
+                <li class="mb-2">
+                  <strong class="text-muted">Sunday:</strong> 9:00 AM - 4:00 PM
+                </li>
+                <li>
+                  <strong class="text-muted">Guided Tours:</strong>
+                  10:00 AM & 3:00 PM daily
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-5">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 text-center">
+        <div class="d-flex justify-content-center gap-3 mb-4">
+          <a
+            href="https://www.facebook.com/profile.php?id=100010466192992"
+            class="text-success fs-4"
+            ><i class="bi bi-facebook"></i
+          ></a>
+          <a
+            href="https://www.instagram.com/thamizh_nilam_thamizh_pannai/"
+            class="text-success fs-4"
+            target="_blank"
+          >
+            <i class="bi bi-instagram"></i>
+          </a>
+          <a
+            href="https://www.youtube.com/@-thamizhnilamthamizhpannai3572/featured"
+            class="text-success fs-4"
+            target="_blank"
+          >
+            <i class="bi bi-youtube"></i>
+          </a>
+        </div>
+        <p class="small mb-0 opacity-75 text-success fw-bolder">
+          © 2025 Thamizh Nilam. All rights reserved.
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<div class="whatsapp-float">
+  <a
+    href="https://wa.me/+919791461913?text=Hi%20Thamizh%20Nilam%20Organic%20Farm,%20I%20would%20like%20to%20know%20more%20about%20your%20Farm%20Visit%20options.%20Please%20share%20details%20about%20availability,%20pricing,%20and%20activities."
+    target="_blank"
+    class="whatsapp-link"
+  >
+    <i class="bi bi-whatsapp"></i>
+  </a>
+</div>
+ß

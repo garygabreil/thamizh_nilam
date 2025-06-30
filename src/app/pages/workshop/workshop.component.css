@@ -1,0 +1,201 @@
+/* Reuse the same CSS from farm-stay component */
+.booking-calendar {
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  transition: all 0.3s ease;
+}
+
+.booking-calendar:hover {
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.calendar-header {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  text-align: center;
+  font-weight: bold;
+  background-color: var(--primary-green);
+  color: white;
+  font-family: "Poppins", sans-serif;
+}
+
+.calendar-header div {
+  padding: 0.75rem 0.25rem;
+  font-size: 0.9rem;
+}
+
+.calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 1px;
+  background-color: #dee2e6;
+}
+
+.day {
+  padding: 1rem 0.25rem;
+  text-align: center;
+  background-color: #fff;
+  cursor: pointer;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.9rem;
+  position: relative;
+  transition: all 0.3s ease;
+  font-family: "Poppins", sans-serif;
+}
+
+.day.available:not(.not-current-month):hover,
+.day.in-range-hover:not(.not-current-month) {
+  background-color: #ffcccc;
+  color: #721c24;
+  transform: scale(1.05);
+  z-index: 1;
+}
+
+.day.not-current-month {
+  color: #aaa;
+  background-color: #f8f9fa;
+  cursor: default;
+}
+
+.day.booked:not(.not-current-month) {
+  background-color: #f8d7da;
+  color: #721c24;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.day.selected-range:not(.not-current-month):not(.booked) {
+  background-color: #ff9999;
+  color: #721c24;
+}
+
+.day.check-in:not(.not-current-month):not(.booked),
+.day.check-out:not(.not-current-month):not(.booked) {
+  background-color: var(--primary-green);
+  color: white !important;
+  font-weight: bold;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.day.past-date:not(.not-current-month) {
+  color: #6c757d;
+  background-color: #e9ecef;
+  cursor: not-allowed;
+  text-decoration: line-through;
+}
+
+.calendar-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  font-size: 0.9rem;
+  margin-top: 1.5rem;
+  padding: 1rem;
+  background-color: var(--light-green);
+  border-radius: 0.5rem;
+}
+
+.calendar-legend > div {
+  display: flex;
+  align-items: center;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  background-color: rgba(255, 255, 255, 0.8);
+}
+
+.legend-box {
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+  margin-right: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  transition: all 0.3s ease;
+}
+
+.available-legend {
+  background-color: #fff;
+  border-color: var(--light-green);
+}
+
+.booked-legend {
+  background-color: #f8d7da;
+}
+
+.selected-legend {
+  background-color: #ff9999;
+}
+
+.check-in-legend {
+  background-color: var(--primary-green);
+}
+
+.past-legend {
+  background-color: #e9ecef;
+}
+
+@media (max-width: 768px) {
+  .calendar-header div {
+    padding: 0.5rem 0.1rem;
+    font-size: 0.8rem;
+  }
+
+  .day {
+    padding: 0.5rem 0.1rem;
+    min-height: 45px;
+    font-size: 0.8rem;
+  }
+
+  .calendar-legend {
+    gap: 1rem;
+    font-size: 0.8rem;
+  }
+
+  .legend-box {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.notification-container {
+  pointer-events: none;
+}
+
+.toast {
+  pointer-events: auto;
+  margin-bottom: 10px;
+  animation: fadeIn 0.3s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.bi-check-circle-fill {
+  animation: checkmark 0.5s ease-out;
+}
+
+@keyframes checkmark {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

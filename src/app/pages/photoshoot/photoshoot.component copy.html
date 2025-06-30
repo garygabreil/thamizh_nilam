@@ -1,0 +1,713 @@
+<div
+  class="notification-container position-fixed top-0 end-0 p-3"
+  style="z-index: 1100"
+>
+  <!-- Loading Notification -->
+  <div
+    *ngIf="isLoading"
+    class="toast show align-items-center text-white bg-primary border-0"
+    role="status"
+  >
+    <div class="d-flex">
+      <div class="toast-body">
+        <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+        Processing your booking...
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Notification -->
+  <div
+    *ngIf="isSuccess"
+    class="toast show align-items-center text-white bg-success border-0"
+    role="alert"
+  >
+    <div class="d-flex">
+      <div class="toast-body">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        Booking successful! We've sent a confirmation to your email.
+      </div>
+      <button
+        type="button"
+        class="btn-close btn-close-white me-2 m-auto"
+        (click)="isSuccess = false"
+      ></button>
+    </div>
+  </div>
+</div>
+
+<!DOCTYPE html>
+<html lang="en">
+  <style>
+    /* Custom styles for hero button if needed */
+    .hero-section .btn-back-home {
+      position: absolute;
+      top: 1.5rem; /* Adjust as needed */
+      left: 1.5rem; /* Adjust as needed */
+      z-index: 10; /* Ensure it's above other hero content if necessary */
+      /* Enhancing visibility against diverse backgrounds */
+      background-color: rgba(
+        0,
+        0,
+        0,
+        0.2
+      ); /* Slight dark background for button */
+      border-color: rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .hero-section .btn-back-home:hover {
+      background-color: rgba(0, 0, 0, 0.4);
+      border-color: #fff;
+      color: #fff;
+    }
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 576px) {
+      .hero-section .btn-back-home {
+        top: 1rem;
+        left: 1rem;
+        padding: 0.375rem 0.75rem; /* Adjust padding for smaller button */
+        font-size: 0.875rem; /* Adjust font size */
+      }
+      .hero-section .btn-back-home .bi {
+        font-size: 1rem; /* Adjust icon size */
+      }
+    }
+  </style>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Photoshoot Booking - Thamizh Nilam Organic Farm</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <!-- Hero Section -->
+    <section
+      class="hero-section bg-light text-white position-relative"
+      style="
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url('https://images.unsplash.com/photo-1516035069371-29a1b244cc32?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')
+            no-repeat center/cover;
+      "
+    >
+      <div class="container-fluid">
+        <button class="btn btn-outline-light btn-back-home" (click)="goBack()">
+          <i class="bi bi-arrow-left"></i> Back to Home
+        </button>
+      </div>
+
+      <div class="container text-center py-5">
+        <h1 class="display-4 fw-bold mb-4 pt-5">Farm Photoshoot Experience</h1>
+        <p class="lead fs-3 mb-5">
+          Capture beautiful moments amidst our scenic organic farm landscapes
+        </p>
+      </div>
+    </section>
+
+    <!-- Photoshoot Info -->
+    <section class="py-5 bg-white">
+      <div class="container">
+        <h2 class="text-center text-success mb-5 section-title">
+          Our Photoshoot Packages
+        </h2>
+        <div class="row align-items-center g-5 mb-5">
+          <div class="col-lg-6">
+            <div class="ratio ratio-16x9 shadow-lg rounded overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1527689368864-3a821dbccc34?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                class="img-fluid"
+                alt="Farm Photoshoot"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <h3 class="text-success mb-4">Picturesque Farm Settings</h3>
+            <p class="lead mb-4">
+              Our organic farm provides stunning natural backdrops for your
+              photoshoots.
+            </p>
+            <p class="mb-4">
+              Whether you're looking for engagement photos, family portraits, or
+              professional branding shots, our farm offers diverse scenic
+              locations including orchards, flower fields, rustic barns, and
+              tranquil ponds. We provide guidance on the best spots and lighting
+              conditions.
+            </p>
+            <div class="mt-4">
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                <span>Multiple picturesque locations on the farm</span>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                <span>Golden hour photography guidance</span>
+              </div>
+              <div class="d-flex align-items-center">
+                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                <span>Option to include farm animals in your shots</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="text-center text-success mb-4">Photoshoot Options</h3>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm package-card">
+              <div class="card-img-top overflow-hidden" style="height: 250px">
+                <img
+                  src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                  class="img-fluid w-100 h-100 object-fit-cover"
+                  alt="Basic Package"
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-success">Basic Package</h5>
+                <p class="card-text">
+                  1-hour photoshoot at our farm with access to 3 scenic
+                  locations.
+                </p>
+                <ul class="list-unstyled">
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>1 hour session
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>3 locations
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>Up to 4 people
+                  </li>
+                </ul>
+                <h5 class="text-success">₹2,500/session</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm package-card">
+              <div class="card-img-top overflow-hidden" style="height: 250px">
+                <img
+                  src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                  class="img-fluid w-100 h-100 object-fit-cover"
+                  alt="Premium Package"
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-success">Premium Package</h5>
+                <p class="card-text">
+                  2-hour photoshoot with full farm access and props included.
+                </p>
+                <ul class="list-unstyled">
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>2 hour session
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>All locations
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>Farm props
+                    included
+                  </li>
+                </ul>
+                <h5 class="text-success">₹4,500/session</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm package-card">
+              <div class="card-img-top overflow-hidden" style="height: 250px">
+                <img
+                  src="https://images.unsplash.com/photo-1526779259212-939e64788e3c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                  class="img-fluid w-100 h-100 object-fit-cover"
+                  alt="Deluxe Package"
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-success">Deluxe Package</h5>
+                <p class="card-text">
+                  Full-day access with professional photographer and styling
+                  included.
+                </p>
+                <ul class="list-unstyled">
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>4 hour session
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>Professional
+                    photographer
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>Basic styling
+                    included
+                  </li>
+                </ul>
+                <h5 class="text-success">₹8,500/session</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <h2 class="text-center text-success mb-5 section-title">
+          Book Your Photoshoot
+        </h2>
+        <div class="row g-5">
+          <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body p-4">
+                <h3 class="text-success mb-4">Availability Calendar</h3>
+                <div class="text-center mb-4">
+                  <div class="btn-group" role="group">
+                    <button
+                      type="button"
+                      class="btn btn-outline-success"
+                      (click)="prevMonth()"
+                    >
+                      <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      id="currentMonthDisplay"
+                      disabled
+                    >
+                      {{ currentMonthYear }}
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-outline-success"
+                      (click)="nextMonth()"
+                    >
+                      <i class="bi bi-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="booking-calendar">
+                  <div class="calendar-header">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                  </div>
+                  <div class="calendar-grid">
+                    <div
+                      *ngFor="let day of calendarDays"
+                      class="day"
+                      [ngClass]="{
+                        'not-current-month': !day.isCurrentMonth,
+                        booked: day.isBooked && day.isCurrentMonth,
+                        'selected-range': day.isSelected && day.isCurrentMonth,
+                        'check-in': day.isCheckIn && day.isCurrentMonth,
+                        'check-out': day.isCheckOut && day.isCurrentMonth,
+                        available: day.isAvailable,
+                        'past-date': day.isPast && day.isCurrentMonth
+                      }"
+                      (click)="selectDate(day)"
+                    >
+                      {{ day.dayOfMonth }}
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-4 calendar-legend">
+                  <div>
+                    <span class="legend-box available-legend"></span> Available
+                  </div>
+                  <div>
+                    <span class="legend-box booked-legend"></span> Booked
+                  </div>
+                  <div>
+                    <span class="legend-box selected-legend"></span> Selected
+                    Date
+                  </div>
+                  <div><span class="legend-box past-legend"></span> Past</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-4 p-md-5">
+                <h3 class="text-success mb-4">Booking Form</h3>
+                <form [formGroup]="bookingForm" (ngSubmit)="onBookingSubmit()">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label for="name" class="form-label">Full Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        formControlName="name"
+                        [ngClass]="{
+                          'is-invalid': f['name'].touched && f['name'].invalid
+                        }"
+                      />
+                      <div
+                        *ngIf="f['name'].touched && f['name'].invalid"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f['name'].errors?.['required']">
+                          Full name is required.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="email" class="form-label">Email</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        formControlName="email"
+                        [ngClass]="{
+                          'is-invalid': f['email'].touched && f['email'].invalid
+                        }"
+                      />
+                      <div
+                        *ngIf="f['email'].touched && f['email'].invalid"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f['email'].errors?.['required']">
+                          Email is required.
+                        </div>
+                        <div *ngIf="f['email'].errors?.['email']">
+                          Invalid email format.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="phone" class="form-label">Phone Number</label>
+                      <input
+                        type="tel"
+                        class="form-control"
+                        id="phone"
+                        formControlName="phone"
+                        [ngClass]="{
+                          'is-invalid': f['phone'].touched && f['phone'].invalid
+                        }"
+                      />
+                      <div
+                        *ngIf="f['phone'].touched && f['phone'].invalid"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f['phone'].errors?.['required']">
+                          Phone number is required.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="guests" class="form-label"
+                        >Number of People</label
+                      >
+                      <select
+                        class="form-select"
+                        id="guests"
+                        formControlName="guests"
+                        [ngClass]="{
+                          'is-invalid':
+                            f['guests'].touched && f['guests'].invalid
+                        }"
+                      >
+                        <option value="" selected disabled>Select</option>
+                        <option value="1-4">1-4</option>
+                        <option value="5-8">5-8</option>
+                        <option value="9+">9+</option>
+                      </select>
+                      <div
+                        *ngIf="f['guests'].touched && f['guests'].invalid"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f['guests'].errors?.['required']">
+                          Number of people is required.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="date" class="form-label"
+                        >Photoshoot Date</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="date"
+                        formControlName="date"
+                        [min]="getToday()"
+                        required
+                        readonly
+                        [ngClass]="{
+                          'is-invalid': f['date'].touched && f['date'].invalid
+                        }"
+                      />
+                      <div
+                        *ngIf="f['date'].touched && f['date'].errors?.['required']"
+                        class="invalid-feedback"
+                      >
+                        Date is required (select from calendar).
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="time" class="form-label"
+                        >Preferred Time</label
+                      >
+                      <select
+                        class="form-select"
+                        id="time"
+                        formControlName="time"
+                        [ngClass]="{
+                          'is-invalid': f['time'].touched && f['time'].invalid
+                        }"
+                      >
+                        <option value="" selected disabled>Select</option>
+                        <option value="sunrise">Sunrise (6-8 AM)</option>
+                        <option value="morning">Morning (8-11 AM)</option>
+                        <option value="golden-hour">
+                          Golden Hour (4-6 PM)
+                        </option>
+                        <option value="sunset">Sunset (6-8 PM)</option>
+                      </select>
+                      <div
+                        *ngIf="f['time'].touched && f['time'].invalid"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f['time'].errors?.['required']">
+                          Time slot is required.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <label for="packageType" class="form-label"
+                        >Package Type</label
+                      >
+                      <select
+                        class="form-select"
+                        id="packageType"
+                        formControlName="packageType"
+                        [ngClass]="{
+                          'is-invalid':
+                            f['packageType'].touched && f['packageType'].invalid
+                        }"
+                      >
+                        <option value="" selected disabled>Select</option>
+                        <option
+                          *ngFor="let type of packageTypes"
+                          [value]="type.id"
+                        >
+                          {{ type.name }}
+                        </option>
+                      </select>
+                      <div
+                        *ngIf="
+                          f['packageType'].touched && f['packageType'].invalid
+                        "
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f['packageType'].errors?.['required']">
+                          Package type is required.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <label for="specialRequests" class="form-label"
+                        >Special Requests</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="specialRequests"
+                        rows="3"
+                        formControlName="specialRequests"
+                      ></textarea>
+                    </div>
+                    <div class="col-12 mt-4">
+                      <button
+                        type="submit"
+                        class="btn btn-success btn-lg w-100 py-2"
+                        [disabled]="bookingForm.invalid || isLoading"
+                      >
+                        <span *ngIf="!isLoading">Book Now</span>
+                        <span *ngIf="isLoading">
+                          <span
+                            class="spinner-border spinner-border-sm me-2"
+                            role="status"
+                          ></span>
+                          Processing...
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5 bg-white">
+      <div class="container">
+        <h2 class="text-center text-success mb-5 section-title">
+          What Our Clients Say
+        </h2>
+        <div class="row g-4 justify-content-center">
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm p-4">
+              <div class="d-flex align-items-center mb-3">
+                <img
+                  src="https://randomuser.me/api/portraits/women/45.jpg"
+                  class="rounded-circle testimonial-img me-3"
+                  alt="Client"
+                />
+                <div>
+                  <h6 class="mb-0">Priya R.</h6>
+                  <small class="text-muted">Basic Package</small>
+                </div>
+              </div>
+              <p class="card-text">
+                "The golden hour photos we got at the farm were absolutely
+                stunning! The natural lighting and beautiful backgrounds made
+                our engagement photos perfect."
+              </p>
+              <div class="text-warning">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm p-4">
+              <div class="d-flex align-items-center mb-3">
+                <img
+                  src="https://randomuser.me/api/portraits/men/32.jpg"
+                  class="rounded-circle testimonial-img me-3"
+                  alt="Client"
+                />
+                <div>
+                  <h6 class="mb-0">Arjun K.</h6>
+                  <small class="text-muted">Premium Package</small>
+                </div>
+              </div>
+              <p class="card-text">
+                "We did our family photoshoot here and the kids loved
+                interacting with the farm animals. The variety of locations gave
+                us amazing diversity in our photos."
+              </p>
+              <div class="text-warning">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm p-4">
+              <div class="d-flex align-items-center mb-3">
+                <img
+                  src="https://randomuser.me/api/portraits/women/68.jpg"
+                  class="rounded-circle testimonial-img me-3"
+                  alt="Client"
+                />
+                <div>
+                  <h6 class="mb-0">Deepika M.</h6>
+                  <small class="text-muted">Deluxe Package</small>
+                </div>
+              </div>
+              <p class="card-text">
+                "The professional photographer knew all the best angles and
+                lighting conditions. Our brand photos came out better than we
+                could have imagined!"
+              </p>
+              <div class="text-warning">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 text-success">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <h2 class="fw-bold mb-3 text-success">Thamizh Nilam</h2>
+            <p class="lead mb-4 mx-auto text-success" style="max-width: 600px">
+              An organic farm dedicated to sustainable agriculture and
+              eco-tourism in Tamil Nadu.
+            </p>
+            <div class="d-flex justify-content-center mb-4">
+              <div class="d-flex flex-wrap justify-content-center gap-4">
+                <a
+                  href="index.html#about"
+                  class="text-success text-decoration-none fw-medium"
+                  >About Us</a
+                >
+                <span class="text-success">|</span>
+
+                <a
+                  href="index.html#trees"
+                  class="text-success text-decoration-none fw-medium"
+                  >Our Produce</a
+                >
+                <span class="text-success">|</span>
+
+                <a href="#" class="text-success text-decoration-none fw-medium"
+                  >Photoshoot Booking</a
+                >
+                <span class="text-success">|</span>
+                <a
+                  href="index.html#contact"
+                  class="text-success text-decoration-none fw-medium"
+                  >Contact</a
+                >
+              </div>
+            </div>
+            <div class="d-flex justify-content-center gap-3 mb-4">
+              <a href="#" class="text-white fs-4 text-success"
+                ><i class="bi bi-facebook"></i
+              ></a>
+              <a href="#" class="text-white fs-4 text-success"
+                ><i class="bi bi-instagram"></i
+              ></a>
+              <a href="#" class="text-white fs-4 text-success"
+                ><i class="bi bi-twitter"></i
+              ></a>
+              <a href="#" class="text-white fs-4 text-success"
+                ><i class="bi bi-youtube"></i
+              ></a>
+            </div>
+            <p class="small mb-0 opacity-75 text-success">
+              © 2025 Thamizh Nilam Thamizh Pannai. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

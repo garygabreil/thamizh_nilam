@@ -1,0 +1,200 @@
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-md-8 col-lg-6">
+      <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+          <h3 class="mb-0 text-center">Share Your Experience</h3>
+        </div>
+
+        <div class="card-body px-4 py-4">
+          <form
+            [formGroup]="feedbackForm"
+            (ngSubmit)="onSubmit()"
+            *ngIf="!isSubmitted; else thankYou"
+          >
+            <!-- Name -->
+            <div class="mb-4">
+              <label for="name" class="form-label fw-semibold">Full Name</label>
+              <input
+                type="text"
+                class="form-control rounded-1 border-2"
+                id="name"
+                formControlName="name"
+                [ngClass]="{
+                  'is-invalid': f['name'].touched && f['name'].errors,
+                  'border-primary': f['name'].valid
+                }"
+              />
+              <div
+                class="invalid-feedback mt-1"
+                *ngIf="f['name'].errors?.['required']"
+              >
+                Please enter your name
+              </div>
+              <div
+                class="invalid-feedback mt-1"
+                *ngIf="f['name'].errors?.['minlength']"
+              >
+                Name must be at least 3 characters
+              </div>
+            </div>
+
+            <!-- Email -->
+            <div class="mb-4">
+              <label for="email" class="form-label fw-semibold"
+                >Email Address</label
+              >
+              <input
+                type="email"
+                class="form-control rounded-1 border-2"
+                id="email"
+                formControlName="email"
+                [ngClass]="{
+                  'is-invalid': f['email'].touched && f['email'].errors,
+                  'border-primary': f['email'].valid
+                }"
+              />
+              <div
+                class="invalid-feedback mt-1"
+                *ngIf="f['email'].errors?.['required']"
+              >
+                Please enter your email
+              </div>
+              <div
+                class="invalid-feedback mt-1"
+                *ngIf="f['email'].errors?.['email']"
+              >
+                Please enter a valid email
+              </div>
+            </div>
+
+            <!-- Visit Type -->
+            <div class="mb-4">
+              <label for="visitType" class="form-label fw-semibold"
+                >Visit Type</label
+              >
+              <select
+                class="form-select rounded-1 border-2"
+                id="visitType"
+                formControlName="visitType"
+                [ngClass]="{
+                  'is-invalid': f['visitType'].touched && f['visitType'].errors,
+                  'border-primary': f['visitType'].valid
+                }"
+              >
+                <option value="" disabled selected>
+                  Select your visit type
+                </option>
+                <option *ngFor="let type of visitTypes" [value]="type.value">
+                  {{ type.label }}
+                </option>
+              </select>
+              <div
+                class="invalid-feedback mt-1"
+                *ngIf="f['visitType'].errors?.['required']"
+              >
+                Please select a visit type
+              </div>
+            </div>
+
+            <!-- Rating -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold">Rating</label>
+              <div class="d-flex align-items-center">
+                <div class="rating-stars">
+                  <span
+                    *ngFor="let star of [1, 2, 3, 4, 5]"
+                    (click)="feedbackForm.get('rating')?.setValue(star)"
+                    [ngClass]="{
+                      'text-success': star <= feedbackForm.get('rating')?.value,
+                      'text-muted': star > feedbackForm.get('rating')?.value
+                    }"
+                  >
+                    ★
+                  </span>
+                </div>
+                <span class="ms-2 fw-medium">
+                  {{ feedbackForm.get("rating")?.value || 0 }}/5
+                </span>
+              </div>
+              <div
+                class="invalid-feedback d-block mt-1"
+                *ngIf="f['rating'].touched && f['rating'].errors?.['min']"
+              >
+                Please select a rating (1-5)
+              </div>
+            </div>
+
+            <!-- Feedback -->
+            <div class="mb-4">
+              <label for="feedback" class="form-label fw-semibold"
+                >Your Feedback</label
+              >
+              <textarea
+                class="form-control rounded-1 border-2"
+                id="feedback"
+                rows="4"
+                formControlName="feedback"
+                [ngClass]="{
+                  'is-invalid': f['feedback'].touched && f['feedback'].errors,
+                  'border-primary': f['feedback'].valid
+                }"
+              ></textarea>
+              <div
+                class="invalid-feedback mt-1"
+                *ngIf="f['feedback'].errors?.['required']"
+              >
+                Please share your feedback
+              </div>
+              <div
+                class="invalid-feedback mt-1"
+                *ngIf="f['feedback'].errors?.['minlength']"
+              >
+                Feedback must be at least 10 characters
+              </div>
+            </div>
+
+            <!-- Submit Button -->
+            <button
+              type="submit"
+              class="btn btn-success w-100 py-2 rounded-1 mt-2"
+              [disabled]="isLoading || feedbackForm.invalid"
+            >
+              <span *ngIf="!isLoading">Submit Feedback</span>
+              <span *ngIf="isLoading">
+                <span
+                  class="spinner-border spinner-border-sm me-2"
+                  role="status"
+                  aria-hidden="true"
+                ></span>
+                Processing...
+              </span>
+            </button>
+          </form>
+
+          <ng-template #thankYou>
+            <div class="text-center py-5">
+              <div class="mb-4">
+                <i
+                  class="bi bi-check-circle-fill text-success"
+                  style="font-size: 3.5rem"
+                ></i>
+              </div>
+              <h4 class="text-dark mb-3">Thank You!</h4>
+              <p class="text-muted mb-4">
+                We appreciate your feedback and will use it to improve our
+                services.
+              </p>
+              <button
+                class="btn btn-outline-success rounded-1 px-4"
+                (click)="isSubmitted = false"
+              >
+                <i class="bi bi-plus-circle me-2"></i>Submit Another
+              </button>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,741 @@
+<div
+  class="notification-container position-fixed top-0 end-0 p-3"
+  style="z-index: 1100"
+>
+  <!-- Loading Notification -->
+  <div
+    *ngIf="isLoading"
+    class="toast show align-items-center text-white bg-primary border-0"
+    role="status"
+  >
+    <div class="d-flex">
+      <div class="toast-body">
+        <div class="spinner-border spinner-border-sm me-2" role="status"></div>
+        Processing your workshop registration...
+      </div>
+    </div>
+  </div>
+
+  <!-- Success Notification -->
+  <div
+    *ngIf="isSuccess"
+    class="toast show align-items-center text-white bg-success border-0"
+    role="alert"
+  >
+    <div class="d-flex">
+      <div class="toast-body">
+        <i class="bi bi-check-circle-fill me-2"></i>
+        Registration successful! We've sent details to your email.
+      </div>
+      <button
+        type="button"
+        class="btn-close btn-close-white me-2 m-auto"
+        (click)="isSuccess = false"
+      ></button>
+    </div>
+  </div>
+</div>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Organic Farming Workshops - Thamizh Nilam Organic Farm</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <style>
+    /* Custom styles for hero button if needed */
+    .hero-section .btn-back-home {
+      position: absolute;
+      top: 1.5rem; /* Adjust as needed */
+      left: 1.5rem; /* Adjust as needed */
+      z-index: 10; /* Ensure it's above other hero content if necessary */
+      /* Enhancing visibility against diverse backgrounds */
+      background-color: rgba(
+        0,
+        0,
+        0,
+        0.2
+      ); /* Slight dark background for button */
+      border-color: rgba(255, 255, 255, 0.8);
+      color: rgba(255, 255, 255, 0.9);
+    }
+    .hero-section .btn-back-home:hover {
+      background-color: rgba(0, 0, 0, 0.4);
+      border-color: #fff;
+      color: #fff;
+    }
+
+    /* Responsive adjustments for smaller screens */
+    @media (max-width: 576px) {
+      .hero-section .btn-back-home {
+        top: 1rem;
+        left: 1rem;
+        padding: 0.375rem 0.75rem; /* Adjust padding for smaller button */
+        font-size: 0.875rem; /* Adjust font size */
+      }
+      .hero-section .btn-back-home .bi {
+        font-size: 1rem; /* Adjust icon size */
+      }
+    }
+  </style>
+  <body>
+    <!-- Hero Section -->
+    <section
+      class="hero-section bg-light text-white position-relative"
+      style="
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url('https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')
+            no-repeat center/cover;
+      "
+    >
+      <div class="container-fluid">
+        <button class="btn btn-outline-light btn-back-home" (click)="goBack()">
+          <i class="bi bi-arrow-left"></i> Back to Home
+        </button>
+      </div>
+
+      <div class="container text-center py-5">
+        <h1 class="display-4 fw-bold mb-4 pt-5">Organic Farming Workshops</h1>
+        <p class="lead fs-3 mb-5">
+          Learn traditional agricultural techniques from our expert farmers
+        </p>
+      </div>
+    </section>
+    <!-- Workshop Info -->
+    <section class="py-5 bg-white">
+      <div class="container">
+        <h2 class="text-center text-success mb-5 section-title">
+          Our Workshops
+        </h2>
+        <div class="row align-items-center g-5 mb-5">
+          <div class="col-lg-6">
+            <div class="ratio ratio-16x9 shadow-lg rounded overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1605000797499-95a51c5269ae?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                class="img-fluid"
+                alt="Farm Workshop"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <h3 class="text-success mb-4">Hands-on Learning Experience</h3>
+            <p class="lead mb-4">
+              Gain practical knowledge about organic farming, composting, and
+              sustainable agriculture.
+            </p>
+            <p class="mb-4">
+              Our workshops are designed for both beginners and experienced
+              farmers. You'll learn traditional techniques passed down through
+              generations, combined with modern organic farming practices. All
+              workshops include hands-on activities in our fields.
+            </p>
+            <div class="mt-4">
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                <span>Small group sizes for personalized attention</span>
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                <span
+                  >Take home practical knowledge you can apply immediately</span
+                >
+              </div>
+              <div class="d-flex align-items-center">
+                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                <span>Certificate of completion provided</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="text-center text-success mb-4">Workshop Options</h3>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-img-top overflow-hidden" style="height: 250px">
+                <img
+                  src="https://images.unsplash.com/photo-1604866830513-d547664f2f79?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                  class="img-fluid w-100 h-100 object-fit-cover"
+                  alt="Organic Farming Basics"
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-success">Organic Farming Basics</h5>
+                <p class="card-text">
+                  Introduction to organic farming principles and practices.
+                </p>
+                <ul class="list-unstyled">
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>3-hour session
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>Soil
+                    preparation
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>Natural pest
+                    control
+                  </li>
+                </ul>
+                <h5 class="text-success">₹800/person</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-img-top overflow-hidden" style="height: 250px">
+                <img
+                  src="https://images.unsplash.com/photo-1605007493699-af65834f8a3c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                  class="img-fluid w-100 h-100 object-fit-cover"
+                  alt="Composting Masterclass"
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-success">Composting Masterclass</h5>
+                <p class="card-text">
+                  Learn various composting techniques for home and farm use.
+                </p>
+                <ul class="list-unstyled">
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>4-hour session
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>Vermicomposting
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>Bokashi methods
+                  </li>
+                </ul>
+                <h5 class="text-success">₹1,200/person</h5>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm">
+              <div class="card-img-top overflow-hidden" style="height: 250px">
+                <img
+                  src="https://images.unsplash.com/photo-1586771107445-d3ca888129ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                  class="img-fluid w-100 h-100 object-fit-cover"
+                  alt="Traditional Techniques"
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-success">Traditional Techniques</h5>
+                <p class="card-text">
+                  Rediscover ancient farming methods adapted for modern use.
+                </p>
+                <ul class="list-unstyled">
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>Full-day
+                    workshop
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>Seed saving
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>Natural
+                    irrigation
+                  </li>
+                </ul>
+                <h5 class="text-success">₹2,000/person</h5>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Booking Section -->
+    <!-- Previous HTML remains the same until the booking section -->
+
+    <!-- Booking Section -->
+    <section class="py-5 bg-light">
+      <div class="container">
+        <h2 class="text-center text-success mb-5 section-title">
+          Register for Workshop Package
+        </h2>
+        <div class="row g-5">
+          <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body p-4">
+                <h3 class="text-success mb-4">Availability Calendar</h3>
+                <div class="text-center mb-4">
+                  <div class="btn-group" role="group">
+                    <button
+                      type="button"
+                      class="btn btn-outline-success"
+                      (click)="prevMonth()"
+                    >
+                      <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      id="currentMonthDisplay"
+                      disabled
+                    >
+                      {{ currentMonthYear }}
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-outline-success"
+                      (click)="nextMonth()"
+                    >
+                      <i class="bi bi-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="booking-calendar">
+                  <div class="calendar-header">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                  </div>
+                  <div class="calendar-grid">
+                    <div
+                      *ngFor="let day of calendarDays"
+                      class="day"
+                      [ngClass]="{
+                        'not-current-month': !day.isCurrentMonth,
+                        booked: day.isBooked && day.isCurrentMonth,
+                        'selected-range': day.isSelected && day.isCurrentMonth,
+                        'check-in': day.isCheckIn && day.isCurrentMonth,
+                        'check-out': day.isCheckOut && day.isCurrentMonth,
+                        available: day.isAvailable,
+                        'past-date': day.isPast && day.isCurrentMonth
+                      }"
+                      (click)="selectDate(day)"
+                    >
+                      {{ day.dayOfMonth }}
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-4 calendar-legend">
+                  <div>
+                    <span class="legend-box available-legend"></span> Available
+                  </div>
+                  <div>
+                    <span class="legend-box booked-legend"></span> Booked
+                  </div>
+                  <div>
+                    <span class="legend-box selected-legend"></span> Selected
+                    Range
+                  </div>
+                  <div>
+                    <span class="legend-box check-in-legend"></span> Workshop
+                    Start
+                  </div>
+                  <div>
+                    <span class="legend-box check-out-legend"></span> Workshop
+                    End
+                  </div>
+                  <div><span class="legend-box past-legend"></span> Past</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-4 p-md-5">
+                <h3 class="text-success mb-4">Registration Form</h3>
+                <form [formGroup]="bookingForm" (ngSubmit)="onBookingSubmit()">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label for="name" class="form-label">Full Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        formControlName="name"
+                        [ngClass]="{
+                          'is-invalid': f['name'].touched && f['name'].invalid
+                        }"
+                      />
+                      <div
+                        *ngIf="f['name'].touched && f['name'].invalid"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f['name'].errors?.['required']">
+                          Full name is required.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="email" class="form-label">Email</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        formControlName="email"
+                        [ngClass]="{
+                          'is-invalid': f['email'].touched && f['email'].invalid
+                        }"
+                      />
+                      <div
+                        *ngIf="f['email'].touched && f['email'].invalid"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f['email'].errors?.['required']">
+                          Email is required.
+                        </div>
+                        <div *ngIf="f['email'].errors?.['email']">
+                          Invalid email format.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="phone" class="form-label">Phone Number</label>
+                      <input
+                        type="tel"
+                        class="form-control"
+                        id="phone"
+                        formControlName="phone"
+                        [ngClass]="{
+                          'is-invalid': f['phone'].touched && f['phone'].invalid
+                        }"
+                      />
+                      <div
+                        *ngIf="f['phone'].touched && f['phone'].invalid"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f['phone'].errors?.['required']">
+                          Phone number is required.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="participants" class="form-label"
+                        >Number of Participants</label
+                      >
+                      <select
+                        class="form-select"
+                        id="participants"
+                        formControlName="participants"
+                        [ngClass]="{
+                          'is-invalid':
+                            f['participants'].touched &&
+                            f['participants'].invalid
+                        }"
+                      >
+                        <option value="" selected disabled>Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5+">5+</option>
+                      </select>
+                      <div
+                        *ngIf="
+                          f['participants'].touched && f['participants'].invalid
+                        "
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f['participants'].errors?.['required']">
+                          Number of participants is required.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="startDate" class="form-label"
+                        >Workshop Start Date</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="startDate"
+                        formControlName="startDate"
+                        [min]="getToday()"
+                        required
+                        readonly
+                        [ngClass]="{
+                      'is-invalid':
+                        (f['startDate'].touched && f['startDate'].invalid) || 
+                        bookingForm.errors?.['endDateBeforeStartDate']
+                    }"
+                      />
+                      <div
+                        *ngIf="f['startDate'].touched && f['startDate'].errors?.['required']"
+                        class="invalid-feedback"
+                      >
+                        <div>
+                          Workshop start date is required (select from
+                          calendar).
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="endDate" class="form-label"
+                        >Workshop End Date</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="endDate"
+                        formControlName="endDate"
+                        [min]="f['startDate'].value || getToday()"
+                        required
+                        readonly
+                        [ngClass]="{
+                      'is-invalid':
+                        (f['endDate'].touched && f['endDate'].invalid) || 
+                        bookingForm.errors?.['endDateBeforeStartDate']
+                    }"
+                      />
+                      <div
+                        *ngIf="f['endDate'].touched && f['endDate'].errors?.['required']"
+                        class="invalid-feedback"
+                      >
+                        <div>
+                          Workshop end date is required (select from calendar).
+                        </div>
+                      </div>
+                      <div
+                        *ngIf="bookingForm.errors?.['endDateBeforeStartDate'] && 
+                          (f['endDate'].touched || f['startDate'].touched)"
+                        class="invalid-feedback d-block"
+                      >
+                        End date must be after start date.
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <label for="workshopPackage" class="form-label"
+                        >Workshop Package</label
+                      >
+                      <select
+                        class="form-select"
+                        id="workshopPackage"
+                        formControlName="workshopPackage"
+                        [ngClass]="{
+                          'is-invalid':
+                            f['workshopPackage'].touched &&
+                            f['workshopPackage'].invalid
+                        }"
+                      >
+                        <option value="" selected disabled>Select</option>
+                        <option
+                          *ngFor="let package of workshopPackages"
+                          [value]="package.id"
+                        >
+                          {{ package.name }} ({{
+                            package.price | currency : "INR"
+                          }})
+                        </option>
+                      </select>
+                      <div
+                        *ngIf="
+                          f['workshopPackage'].touched &&
+                          f['workshopPackage'].invalid
+                        "
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f['workshopPackage'].errors?.['required']">
+                          Workshop package is required.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <label for="specialRequests" class="form-label"
+                        >Special Requests</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="specialRequests"
+                        rows="3"
+                        formControlName="specialRequests"
+                      ></textarea>
+                    </div>
+                    <div class="col-12 mt-4">
+                      <button
+                        type="submit"
+                        class="btn btn-success btn-lg w-100 py-2"
+                        [disabled]="bookingForm.invalid || isLoading"
+                      >
+                        <span *ngIf="!isLoading">Register Now</span>
+                        <span *ngIf="isLoading">
+                          <span
+                            class="spinner-border spinner-border-sm me-2"
+                            role="status"
+                          ></span>
+                          Processing...
+                        </span>
+                      </button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="py-5 bg-white">
+      <div class="container">
+        <h2 class="text-center text-success mb-5 section-title">
+          What Participants Say
+        </h2>
+        <div class="row g-4 justify-content-center">
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm p-4">
+              <div class="d-flex align-items-center mb-3">
+                <img
+                  src="https://randomuser.me/api/portraits/women/32.jpg"
+                  class="rounded-circle testimonial-img me-3"
+                  alt="Participant"
+                />
+                <div>
+                  <h6 class="mb-0">Priya R.</h6>
+                  <small class="text-muted">Organic Farming Basics</small>
+                </div>
+              </div>
+              <p class="card-text">
+                "The workshop transformed how I think about farming. I've
+                already started implementing organic techniques in my small home
+                garden!"
+              </p>
+              <div class="text-warning">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm p-4">
+              <div class="d-flex align-items-center mb-3">
+                <img
+                  src="https://randomuser.me/api/portraits/men/45.jpg"
+                  class="rounded-circle testimonial-img me-3"
+                  alt="Participant"
+                />
+                <div>
+                  <h6 class="mb-0">Arun K.</h6>
+                  <small class="text-muted">Composting Masterclass</small>
+                </div>
+              </div>
+              <p class="card-text">
+                "The composting techniques I learned have helped reduce our
+                household waste by 60%. The instructor was incredibly
+                knowledgeable."
+              </p>
+              <div class="text-warning">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-half"></i>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 border-0 shadow-sm p-4">
+              <div class="d-flex align-items-center mb-3">
+                <img
+                  src="https://randomuser.me/api/portraits/women/68.jpg"
+                  class="rounded-circle testimonial-img me-3"
+                  alt="Participant"
+                />
+                <div>
+                  <h6 class="mb-0">Deepa M.</h6>
+                  <small class="text-muted">Traditional Techniques</small>
+                </div>
+              </div>
+              <p class="card-text">
+                "Rediscovering our ancestral farming methods was eye-opening.
+                The full-day workshop was worth every rupee!"
+              </p>
+              <div class="text-warning">
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+                <i class="bi bi-star-fill"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-5 text-success">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <h2 class="fw-bold mb-3 text-success">Thamizh Nilam</h2>
+            <p class="lead mb-4 mx-auto text-success" style="max-width: 600px">
+              An organic farm dedicated to sustainable agriculture and
+              eco-tourism in Tamil Nadu.
+            </p>
+            <div class="d-flex justify-content-center mb-4">
+              <div class="d-flex flex-wrap justify-content-center gap-4">
+                <a
+                  href="index.html#about"
+                  class="text-success text-decoration-none fw-medium"
+                  >About Us</a
+                >
+                <span class="text-success">|</span>
+
+                <a
+                  href="index.html#trees"
+                  class="text-success text-decoration-none fw-medium"
+                  >Our Produce</a
+                >
+                <span class="text-success">|</span>
+
+                <a href="#" class="text-success text-decoration-none fw-medium"
+                  >Workshops</a
+                >
+                <span class="text-success">|</span>
+                <a
+                  href="index.html#contact"
+                  class="text-success text-decoration-none fw-medium"
+                  >Contact</a
+                >
+              </div>
+            </div>
+            <div class="d-flex justify-content-center gap-3 mb-4">
+              <a href="#" class="text-white fs-4 text-success"
+                ><i class="bi bi-facebook"></i
+              ></a>
+              <a href="#" class="text-white fs-4 text-success"
+                ><i class="bi bi-instagram"></i
+              ></a>
+              <a href="#" class="text-white fs-4 text-success"
+                ><i class="bi bi-twitter"></i
+              ></a>
+              <a href="#" class="text-white fs-4 text-success"
+                ><i class="bi bi-youtube"></i
+              ></a>
+            </div>
+            <p class="small mb-0 opacity-75 text-success">
+              © 2025 Thamizh Nilam Thamizh Pannai. All rights reserved.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

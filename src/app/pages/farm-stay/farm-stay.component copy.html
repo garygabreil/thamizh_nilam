@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Farm Stay - Thamizh Nilam</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      .hero-section .btn-back-home {
+        position: absolute;
+        top: 1.5rem;
+        left: 1.5rem;
+        z-index: 10;
+        background-color: rgba(0, 0, 0, 0.2);
+        border-color: rgba(255, 255, 255, 0.8);
+        color: rgba(255, 255, 255, 0.9);
+      }
+      .hero-section .btn-back-home:hover {
+        background-color: rgba(0, 0, 0, 0.4);
+        border-color: #fff;
+        color: #fff;
+      }
+
+      .booking-calendar {
+        display: grid;
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+        margin-bottom: 1rem;
+      }
+      .calendar-header {
+        display: contents;
+        font-weight: 600;
+        text-align: center;
+      }
+      .calendar-header > div {
+        padding: 5px;
+      }
+      .calendar-grid {
+        display: contents;
+      }
+      .day {
+        padding: 10px;
+        text-align: center;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+      .day.not-current-month {
+        color: #ccc;
+      }
+      .day.booked {
+        background-color: #ffcccc;
+        color: #ff0000;
+        cursor: not-allowed;
+      }
+      .day.selected-range {
+        background-color: #d4edda;
+      }
+      .day.check-in {
+        background-color: #28a745;
+        color: white;
+      }
+      .day.check-out {
+        background-color: #dc3545;
+        color: white;
+      }
+      .day.past-date {
+        background-color: #f8f9fa;
+        color: #6c757d;
+        cursor: not-allowed;
+      }
+      .day.available:hover {
+        background-color: #e2e3e5;
+      }
+
+      .calendar-legend {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        margin-top: 15px;
+      }
+      .calendar-legend > div {
+        display: flex;
+        align-items: center;
+        font-size: 0.85rem;
+      }
+      .legend-box {
+        display: inline-block;
+        width: 15px;
+        height: 15px;
+        margin-right: 5px;
+        border-radius: 3px;
+      }
+      .available-legend {
+        background-color: #e2e3e5;
+      }
+      .booked-legend {
+        background-color: #ffcccc;
+      }
+      .selected-legend {
+        background-color: #d4edda;
+      }
+      .check-in-legend {
+        background-color: #28a745;
+      }
+      .past-legend {
+        background-color: #f8f9fa;
+      }
+
+      .icon-circle {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .whatsapp-float {
+        position: fixed;
+        width: 60px;
+        height: 60px;
+        bottom: 40px;
+        right: 40px;
+        background-color: #25d366;
+        color: #fff;
+        border-radius: 50px;
+        text-align: center;
+        font-size: 30px;
+        box-shadow: 2px 2px 3px #999;
+        z-index: 100;
+      }
+
+      .whatsapp-link {
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+      }
+
+      @media (max-width: 576px) {
+        .hero-section .btn-back-home {
+          top: 1rem;
+          left: 1rem;
+          padding: 0.375rem 0.75rem;
+          font-size: 0.875rem;
+        }
+        .hero-section .btn-back-home .bi {
+          font-size: 1rem;
+        }
+        .day {
+          padding: 5px;
+          font-size: 0.8rem;
+        }
+        .whatsapp-float {
+          width: 50px;
+          height: 50px;
+          bottom: 20px;
+          right: 20px;
+          font-size: 25px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      class="notification-container position-fixed top-0 end-0 p-3"
+      style="z-index: 1100"
+    >
+      <div
+        *ngIf="isLoading"
+        class="toast show align-items-center text-white bg-primary border-0"
+        role="status"
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            <div
+              class="spinner-border spinner-border-sm me-2"
+              role="status"
+            ></div>
+            Processing your booking...
+          </div>
+        </div>
+      </div>
+
+      <div
+        *ngIf="isSuccess"
+        class="toast show align-items-center text-white bg-success border-0"
+        role="alert"
+      >
+        <div class="d-flex">
+          <div class="toast-body">
+            <i class="bi bi-check-circle-fill me-2"></i>
+            Booking successful! We've sent a confirmation to your email.
+          </div>
+          <button
+            type="button"
+            class="btn-close btn-close-white me-2 m-auto"
+            (click)="isSuccess = false"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <section
+      class="hero-section bg-light text-white position-relative"
+      style="
+        background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+          url('https://images.unsplash.com/photo-1601918774946-25832a4be0d6?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80')
+            no-repeat center/cover;
+        min-height: 300px;
+      "
+    >
+      <div class="container-fluid">
+        <button
+          class="btn btn-outline-light btn-back-home fw-bolder"
+          (click)="goBack()"
+        >
+          <i class="bi bi-arrow-left"></i> Back to Home
+        </button>
+      </div>
+
+      <div class="container text-center py-5">
+        <h1 class="display-4 fw-bold mb-4 pt-5 fw-bolder text-success">
+          Farm Stay Experience
+        </h1>
+        <p class="lead fs-3 mb-5 fw-bolder">
+          Immerse yourself in authentic rural life with our comfortable farmstay
+          accommodations
+        </p>
+      </div>
+    </section>
+
+    <section class="py-5 bg-white">
+      <div class="container">
+        <h2 class="text-center text-success mb-5 section-title fw-bolder">
+          Our Farm Stay
+        </h2>
+        <div class="row align-items-center g-5 mb-5">
+          <div class="col-lg-6">
+            <div class="ratio ratio-16x9 shadow-lg rounded overflow-hidden">
+              <img
+                src="https://images.unsplash.com/photo-1582719471386-3a8b0b17d06a?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                class="img-fluid"
+                alt="Farm Stay Cottage"
+              />
+            </div>
+          </div>
+          <div class="col-lg-6">
+            <h3 class="text-success mb-4 fw-bolder">
+              Authentic Rural Experience
+            </h3>
+            <p class="lead mb-4 fw-bolder text-muted">
+              Stay in our traditional-style cottages surrounded by organic
+              farmland.
+            </p>
+            <p class="mb-4 fw-bolder text-muted">
+              Our farm stay offers a unique opportunity to disconnect from city
+              life and reconnect with nature. Wake up to the sounds of birds,
+              enjoy fresh farm-to-table meals, and participate in daily farming
+              activities.
+            </p>
+            <div class="mt-4">
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                <span class="fw-bolder text-muted"
+                  >Traditional cottages with modern amenities</span
+                >
+              </div>
+              <div class="d-flex align-items-center mb-3">
+                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                <span class="fw-bolder text-muted"
+                  >Organic meals prepared with farm-fresh ingredients</span
+                >
+              </div>
+              <div class="d-flex align-items-center">
+                <i class="bi bi-check-circle-fill text-success me-3 fs-5"></i>
+                <span class="fw-bolder text-muted"
+                  >Guided farm tours and hands-on activities</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <h3 class="text-center text-success mb-4 fw-bolder">
+          Accommodation Options
+        </h3>
+        <div class="row g-4">
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm room-card">
+              <div class="card-img-top overflow-hidden" style="height: 250px">
+                <img
+                  src="https://images.unsplash.com/photo-1566073771259-6a8506099945?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                  class="img-fluid w-100 h-100 object-fit-cover"
+                  alt="Standard Cottage"
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-success fw-bolder">
+                  Standard Cottage
+                </h5>
+                <p class="card-text text-muted fw-bolder">
+                  Cozy traditional cottage with basic amenities, perfect for
+                  solo travelers or couples.
+                </p>
+                <ul class="list-unstyled text-muted fw-bolder">
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>1 double bed
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>Attached
+                    bathroom
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>Fan & mosquito
+                    net
+                  </li>
+                </ul>
+                <h5 class="text-success fw-bolder">₹1,500/night</h5>
+              </div>
+              <div class="card-footer bg-transparent border-0">
+                <button
+                  class="btn btn-success w-100"
+                  (click)="selectPackage('standard')"
+                >
+                  Book Now
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm room-card">
+              <div class="card-img-top overflow-hidden" style="height: 250px">
+                <img
+                  src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                  class="img-fluid w-100 h-100 object-fit-cover"
+                  alt="Family Cottage"
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-success fw-bolder">
+                  Family Cottage
+                </h5>
+                <p class="card-text text-muted fw-bolder">
+                  Spacious cottage with separate sleeping areas, ideal for
+                  families or small groups.
+                </p>
+                <ul class="list-unstyled text-muted fw-bolder">
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>1 double + 2
+                    single beds
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>Attached
+                    bathroom
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>Fan, mosquito
+                    net & sitting area
+                  </li>
+                </ul>
+                <h5 class="text-success fw-bolder">₹2,500/night</h5>
+              </div>
+              <div class="card-footer bg-transparent border-0">
+                <button
+                  class="btn btn-success w-100"
+                  (click)="selectPackage('family')"
+                >
+                  Book Now
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4">
+            <div class="card h-100 shadow-sm room-card">
+              <div class="card-img-top overflow-hidden" style="height: 250px">
+                <img
+                  src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80"
+                  class="img-fluid w-100 h-100 object-fit-cover"
+                  alt="Deluxe Cottage"
+                />
+              </div>
+              <div class="card-body">
+                <h5 class="card-title text-success fw-bolder">
+                  Deluxe Cottage
+                </h5>
+                <p class="card-text text-muted fw-bolder">
+                  Premium accommodation with enhanced comfort and private
+                  veranda.
+                </p>
+                <ul class="list-unstyled text-muted fw-bolder">
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>King size bed
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>Attached
+                    bathroom with hot water
+                  </li>
+                  <li class="mb-2">
+                    <i class="bi bi-check text-success me-2"></i>AC, fan &
+                    mosquito net
+                  </li>
+                </ul>
+                <h5 class="text-success fw-bolder">₹3,500/night</h5>
+              </div>
+              <div class="card-footer bg-transparent border-0">
+                <button
+                  class="btn btn-success w-100"
+                  (click)="selectPackage('deluxe')"
+                >
+                  Book Now
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="reservationForm" class="py-5 bg-light">
+      <div class="container">
+        <h2 class="text-center text-success mb-5 section-title fw-bolder">
+          Book Your Stay
+        </h2>
+        <div class="row g-5">
+          <div class="col-lg-6">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body p-4">
+                <h3 class="text-success mb-4 fw-bolder">
+                  Availability Calendar
+                </h3>
+                <div class="text-center mb-4">
+                  <div class="btn-group" role="group">
+                    <button
+                      type="button"
+                      class="btn btn-outline-success"
+                      (click)="prevMonth()"
+                    >
+                      <i class="bi bi-chevron-left"></i>
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-success"
+                      id="currentMonthDisplay"
+                      disabled
+                    >
+                      {{ currentMonthYear }}
+                    </button>
+                    <button
+                      type="button"
+                      class="btn btn-outline-success"
+                      (click)="nextMonth()"
+                    >
+                      <i class="bi bi-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+                <div class="booking-calendar">
+                  <div class="calendar-header">
+                    <div>Sun</div>
+                    <div>Mon</div>
+                    <div>Tue</div>
+                    <div>Wed</div>
+                    <div>Thu</div>
+                    <div>Fri</div>
+                    <div>Sat</div>
+                  </div>
+                  <div class="calendar-grid">
+                    <div
+                      *ngFor="let day of calendarDays"
+                      class="day"
+                      [ngClass]="{
+                        'not-current-month': !day.isCurrentMonth,
+                        booked: day.isBooked && day.isCurrentMonth,
+                        'selected-range': day.isSelected && day.isCurrentMonth,
+                        'check-in': day.isCheckIn && day.isCurrentMonth,
+                        'check-out': day.isCheckOut && day.isCurrentMonth,
+                        available: day.isAvailable,
+                        'past-date': day.isPast && day.isCurrentMonth
+                      }"
+                      (click)="selectDate(day)"
+                    >
+                      {{ day.dayOfMonth }}
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-4 calendar-legend">
+                  <div>
+                    <span class="legend-box available-legend"></span> Available
+                  </div>
+                  <div>
+                    <span class="legend-box booked-legend"></span> Booked
+                  </div>
+                  <div>
+                    <span class="legend-box selected-legend"></span> Selected
+                    Range
+                  </div>
+                  <div>
+                    <span class="legend-box check-in-legend"></span> Check-in
+                  </div>
+                  <div>
+                    <span class="legend-box check-out-legend"></span> Check-out
+                  </div>
+                  <div><span class="legend-box past-legend"></span> Past</div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-6">
+            <div class="card border-0 shadow-sm">
+              <div class="card-body p-4 p-md-5">
+                <h3 class="text-success mb-4 fw-bolder">Reservation Form</h3>
+                <form [formGroup]="bookingForm" (ngSubmit)="onBookingSubmit()">
+                  <div class="row g-3">
+                    <div class="col-md-6">
+                      <label for="name" class="form-label">Full Name</label>
+                      <input
+                        type="text"
+                        class="form-control"
+                        id="name"
+                        formControlName="name"
+                        [ngClass]="{
+                          'is-invalid': f['name'].touched && f['name'].invalid
+                        }"
+                      />
+                      <div
+                        *ngIf="f['name'].touched && f['name'].invalid"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f['name'].errors?.['required']">
+                          Full name is required.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="email" class="form-label">Email</label>
+                      <input
+                        type="email"
+                        class="form-control"
+                        id="email"
+                        formControlName="email"
+                        [ngClass]="{
+                          'is-invalid': f['email'].touched && f['email'].invalid
+                        }"
+                      />
+                      <div
+                        *ngIf="f['email'].touched && f['email'].invalid"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f['email'].errors?.['required']">
+                          Email is required.
+                        </div>
+                        <div *ngIf="f['email'].errors?.['email']">
+                          Invalid email format.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="phone" class="form-label">Phone Number</label>
+                      <input
+                        type="tel"
+                        class="form-control"
+                        id="phone"
+                        formControlName="phone"
+                        [ngClass]="{
+                          'is-invalid': f['phone'].touched && f['phone'].invalid
+                        }"
+                      />
+                      <div
+                        *ngIf="f['phone'].touched && f['phone'].invalid"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f['phone'].errors?.['required']">
+                          Phone number is required.
+                        </div>
+                        <div *ngIf="f['phone'].errors?.['pattern']">
+                          Please enter a valid phone number.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="guests" class="form-label"
+                        >Number of Guests</label
+                      >
+                      <select
+                        class="form-select"
+                        id="guests"
+                        formControlName="guests"
+                        [ngClass]="{
+                          'is-invalid':
+                            f['guests'].touched && f['guests'].invalid
+                        }"
+                      >
+                        <option value="" selected disabled>Select</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5+">5+</option>
+                      </select>
+                      <div
+                        *ngIf="f['guests'].touched && f['guests'].invalid"
+                        class="invalid-feedback"
+                      >
+                        <div *ngIf="f['guests'].errors?.['required']">
+                          Number of guests is required.
+                        </div>
+                        <div *ngIf="f['guests'].errors?.['min']">
+                          Must be at least 1 guest.
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="checkin" class="form-label"
+                        >Check-in Date</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="checkin"
+                        formControlName="checkin"
+                        [min]="getToday()"
+                        required
+                        readonly
+                        [ngClass]="{ 'is-invalid': (f['checkin'].touched && f['checkin'].invalid) || bookingForm.errors?.['checkoutBeforeCheckin'] }"
+                      />
+                      <div
+                        *ngIf="f['checkin'].touched && f['checkin'].errors?.['required']"
+                        class="invalid-feedback"
+                      >
+                        Check-in date is required (select from calendar).
+                      </div>
+                    </div>
+                    <div class="col-md-6">
+                      <label for="checkout" class="form-label"
+                        >Check-out Date</label
+                      >
+                      <input
+                        type="date"
+                        class="form-control"
+                        id="checkout"
+                        formControlName="checkout"
+                        [min]="getToday()"
+                        required
+                        readonly
+                        [ngClass]="{ 'is-invalid': (f['checkout'].touched && f['checkout'].invalid) || bookingForm.errors?.['checkoutBeforeCheckin'] }"
+                      />
+                      <div
+                        *ngIf="f['checkout'].touched && f['checkout'].errors?.['required']"
+                        class="invalid-feedback"
+                      >
+                        Check-out date is required (select from calendar).
+                      </div>
+                      <div
+                        *ngIf="bookingForm.errors?.['checkoutBeforeCheckin']"
+                        class="invalid-feedback"
+                      >
+                        Check-out date must be after check-in date.
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <label for="roomType" class="form-label"
+                        >Accommodation Type</label
+                      >
+                      <select
+                        class="form-select"
+                        id="roomType"
+                        formControlName="roomType"
+                        [ngClass]="{
+                          'is-invalid':
+                            f['roomType'].touched && f['roomType'].invalid
+                        }"
+                      >
+                        <option value="" selected disabled>Select</option>
+                        <option
+                          *ngFor="let room of accommodationTypes"
+                          [value]="room.id"
+                        >
+                          {{ room.name }} (₹{{ room.price | number }}/night)
+                        </option>
+                      </select>
+                      <div
+                        *ngIf="f['roomType'].touched && f['roomType'].invalid"
+                        class="invalid-feedback"
+                      >
+                        Accommodation type is required.
+                      </div>
+                    </div>
+                    <div class="col-12">
+                      <label for="specialRequests" class="form-label"
+                        >Special Requests</label
+                      >
+                      <textarea
+                        class="form-control"
+                        id="specialRequests"
+                        formControlName="specialRequests"
+                        rows="3"
+                      ></textarea>
+                    </div>
+                  </div>
+
+                  <div *ngIf="showTotal" class="mt-4 p-3 bg-light rounded">
+                    <div
+                      class="d-flex justify-content-between align-items-center"
+                    >
+                      <div>
+                        <h5 class="mb-1">Booking Summary</h5>
+                        <small class="text-muted">
+                          {{
+                            getNumberOfNights(
+                              f["checkin"].value,
+                              f["checkout"].value
+                            )
+                          }}
+                          nights ×
+                          {{ getSelectedRoomType()?.name }}
+                        </small>
+                      </div>
+                      <h4 class="mb-0 text-success">
+                        ₹{{ totalAmount | number }}
+                      </h4>
+                    </div>
+                    <small class="text-muted d-block mt-1"
+                      >Includes all applicable taxes</small
+                    >
+                  </div>
+
+                  <div class="d-grid mt-4">
+                    <button
+                      type="submit"
+                      class="btn btn-success btn-lg"
+                      [disabled]="isLoading"
+                    >
+                      <span *ngIf="!isLoading">Confirm Booking</span>
+                      <span *ngIf="isLoading">
+                        <span
+                          class="spinner-border spinner-border-sm"
+                          role="status"
+                          aria-hidden="true"
+                        ></span>
+                        Processing...
+                      </span>
+                    </button>
+                  </div>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-5 bg-white">
+      <div class="container">
+        <h2 class="text-center text-success mb-5 fw-bolder">
+          Farm Stay Activities
+        </h2>
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body text-center p-4">
+                <div
+                  class="icon-circle bg-success bg-opacity-10 text-success mx-auto mb-4"
+                >
+                  <i class="bi bi-tree fs-2"></i>
+                </div>
+                <h5 class="card-title text-success fw-bolder">Farm Tour</h5>
+                <p class="card-text fw-bolder text-muted">
+                  Guided tour of our organic farm to learn about sustainable
+                  agriculture practices and see where your food comes from.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body text-center p-4">
+                <div
+                  class="icon-circle bg-success bg-opacity-10 text-success mx-auto mb-4"
+                >
+                  <i class="bi bi-basket fs-2"></i>
+                </div>
+                <h5 class="card-title text-success fw-bolder">Harvesting</h5>
+                <p class="card-text text-muted fw-bolder">
+                  Hands-on experience harvesting seasonal fruits, vegetables, or
+                  herbs depending on the time of your visit.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="card border-0 shadow-sm h-100">
+              <div class="card-body text-center p-4">
+                <div
+                  class="icon-circle bg-success bg-opacity-10 text-success mx-auto mb-4"
+                >
+                  <i class="bi bi-cup-hot fs-2"></i>
+                </div>
+                <h5 class="card-title fw-bolder text-success">Cooking Class</h5>
+                <p class="card-text fw-bolder text-muted">
+                  Learn to prepare traditional dishes using fresh ingredients
+                  from our farm in our outdoor kitchen.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="bg-dark text-white py-5">
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-4 mb-4 mb-lg-0"></div>
+          <div class="col-lg-4 mb-4 mb-lg-0">
+            <h5 class="text-success mb-4 fw-bolder">Contact Us</h5>
+            <p>
+              <i class="bi bi-geo-alt-fill me-2"></i>
+              <span class="fw-bolder"
+                >Organic Farm Road, Village, District, Tamil Nadu</span
+              >
+            </p>
+            <p>
+              <i class="bi bi-telephone-fill me-2"></i>
+              <span class="fw-bolder"> +91 9876543210</span>
+            </p>
+            <p>
+              <i class="bi bi-envelope-fill me-2"></i>
+              <span class="fw-bolder">contact&#64;thamizhnilam.com</span>
+            </p>
+          </div>
+          <div class="col-lg-4">
+            <h5 class="text-success mb-4"></h5>
+          </div>
+        </div>
+        <hr class="my-4" />
+        <div class="text-center">
+          <p class="mb-0 fw-bolder">
+            &copy; 2025 Thamizh Nilam Organic Farm. All rights reserved.
+          </p>
+        </div>
+      </div>
+    </footer>
+
+    <!-- WhatsApp floating button -->
+    <div class="whatsapp-float">
+      <a
+        href="https://wa.me/+919791461913?text=Hi%20Thamizh%20Nilam%20Organic%20Farm,%20I%20would%20like%20to%20know%20more%20about%20your%20Farm%20Stay%20options.%20Please%20share%20details%20about%20availability,%20pricing,%20and%20facilities."
+        target="_blank"
+        class="whatsapp-link"
+      >
+        <i class="bi bi-whatsapp"></i>
+      </a>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+<section class="hero-section">
+  <video
+    #heroVideo
+    autoplay
+    loop
+    playsinline
+    [muted]="isMuted"
+    preload="auto"
+    class="hero-video"
+    [poster]="posterImage"
+    (error)="onVideoError()"
+  >
+    <source *ngIf="!isMobile" [src]="videoSources.desktop" type="video/mp4" />
+    <source *ngIf="isMobile" [src]="videoSources.mobile" type="video/mp4" />
+    Your browser does not support the video tag.
+  </video>
+
+  <div class="hero-overlay"></div>
+
+  <div class="hero-content">
+    <h1>{{ title }}</h1>
+    <p>{{ description }}</p>
+
+    <div class="hero-actions">
+      <a [href]="buttonLink" class="btn btn-success btn-lg">
+        {{ buttonText }}
+      </a>
+
+      <div class="video-controls">
+        <button
+          class="mute-button"
+          (click)="toggleMute()"
+          aria-label="Toggle mute"
+        >
+          <i
+            class="bi"
+            [class.bi-volume-mute-fill]="isMuted"
+            [class.bi-volume-up-fill]="!isMuted"
+          ></i>
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
