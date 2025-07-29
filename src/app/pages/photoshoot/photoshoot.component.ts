@@ -374,4 +374,20 @@ export class PhotoshootComponent implements OnInit, OnDestroy {
   goBack() {
     this.router.navigate(['']);
   }
+
+  navigateToPrivacy() {
+    this.router.navigate(['/privacy-policy']);
+  }
+
+  navigateToTermsAndConditions() {
+    this.router.navigate(['/terms-conditions']);
+  }
+
+  navigateToShippingDelivery() {
+    this.router.navigate(['/shipping-delivery']);
+  }
+
+  navigateToCancellationRefund() {
+    this.router.navigate(['/cancellation-refund']);
+  }
 }

@@ -12,7 +12,6 @@ import {
   httpsCallable,
 } from '@angular/fire/functions';
 
-import { getFunctions } from '@angular/fire/functions';
 import {
   Firestore,
   collection,
@@ -397,5 +396,21 @@ export class SchoolTripsComponent implements OnInit, OnDestroy {
     if (element) {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+  }
+
+  navigateToPrivacy() {
+    this.router.navigate(['/privacy-policy']);
+  }
+
+  navigateToTermsAndConditions() {
+    this.router.navigate(['/terms-conditions']);
+  }
+
+  navigateToShippingDelivery() {
+    this.router.navigate(['/shipping-delivery']);
+  }
+
+  navigateToCancellationRefund() {
+    this.router.navigate(['/cancellation-refund']);
   }
 }

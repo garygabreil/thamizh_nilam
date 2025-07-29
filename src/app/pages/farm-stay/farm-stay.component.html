@@ -1329,37 +1329,65 @@
         title="Farm Stay"
       ></app-feedback-carousel>
     </section>
-
-    <footer class="bg-dark text-white py-5">
+    <footer class="py-5">
       <div class="container">
-        <div class="row">
-          <div class="col-lg-4 mb-4 mb-lg-0"></div>
-          <div class="col-lg-4 mb-4 mb-lg-0">
-            <h5 class="text-success mb-4 fw-bolder">Contact Us</h5>
-            <p>
-              <i class="bi bi-geo-alt-fill me-2"></i>
-              <span class="fw-bolder"
-                >Organic Farm Road, Village, District, Tamil Nadu</span
+        <div class="row justify-content-center">
+          <div class="col-lg-8 text-center">
+            <div class="d-flex justify-content-center gap-3 mb-4">
+              <a
+                style="cursor: pointer"
+                href="https://www.facebook.com/profile.php?id=100010466192992"
+                class="text-success fs-4"
+                ><i class="bi bi-facebook"></i
+              ></a>
+              <a
+                style="cursor: pointer"
+                href="https://www.instagram.com/thamizh_nilam_thamizh_pannai/"
+                class="text-success fs-4"
+                target="_blank"
               >
-            </p>
-            <p>
-              <i class="bi bi-telephone-fill me-2"></i>
-              <span class="fw-bolder"> +91 9876543210</span>
-            </p>
-            <p>
-              <i class="bi bi-envelope-fill me-2"></i>
-              <span class="fw-bolder">contact&#64;thamizhnilam.com</span>
+                <i class="bi bi-instagram"></i>
+              </a>
+              <a
+                style="cursor: pointer"
+                href="https://www.youtube.com/@-thamizhnilamthamizhpannai3572/featured"
+                class="text-success fs-4"
+                target="_blank"
+              >
+                <i class="bi bi-youtube"></i>
+              </a>
+            </div>
+            <!-- Legal Links -->
+            <div class="d-flex justify-content-center flex-wrap mb-3">
+              <a
+                (click)="navigateToPrivacy()"
+                class="text-success mx-3 fw-bolder small"
+                style="cursor: pointer"
+                >Privacy Policy</a
+              >
+              <a
+                (click)="navigateToTermsAndConditions()"
+                class="text-success mx-3 fw-bolder small"
+                style="cursor: pointer"
+                >Terms & Conditions</a
+              >
+              <a
+                (click)="navigateToCancellationRefund()"
+                class="text-success mx-3 fw-bolder small"
+                style="cursor: pointer"
+                >Cancellation & Refund</a
+              >
+              <a
+                (click)="navigateToShippingDelivery()"
+                class="text-success mx-3 fw-bolder small"
+                style="cursor: pointer"
+                >Shipping & Delivery</a
+              >
+            </div>
+            <p class="small mb-0 opacity-75 text-success fw-bolder">
+              © 2025 Thamizh Nilam. All rights reserved.
             </p>
           </div>
-          <div class="col-lg-4">
-            <h5 class="text-success mb-4"></h5>
-          </div>
-        </div>
-        <hr class="my-4" />
-        <div class="text-center">
-          <p class="mb-0 fw-bolder">
-            &copy; 2025 Thamizh Nilam Organic Farm. All rights reserved.
-          </p>
         </div>
       </div>
     </footer>

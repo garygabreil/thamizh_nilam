@@ -433,4 +433,20 @@ export class FarmVisitComponent implements OnInit, OnDestroy {
       element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
   }
+
+  navigateToPrivacy() {
+    this.router.navigate(['/privacy-policy']);
+  }
+
+  navigateToTermsAndConditions() {
+    this.router.navigate(['/terms-conditions']);
+  }
+
+  navigateToShippingDelivery() {
+    this.router.navigate(['/shipping-delivery']);
+  }
+
+  navigateToCancellationRefund() {
+    this.router.navigate(['/cancellation-refund']);
+  }
 }
