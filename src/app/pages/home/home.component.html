@@ -3,24 +3,13 @@
   <div class="container">
     <a class="navbar-brand" href="#">
       <div class="d-flex align-items-center">
-        <!-- Leaf Icon -->
-        <div class="leaf-icon me-2">
-          <svg width="40" height="40" viewBox="0 0 100 100">
-            <circle cx="50" cy="50" r="45" fill="#2e8b57" fill-opacity="0.1" />
-            <path
-              d="M50,20 C70,10 85,40 50,90 C15,40 30,10 50,20 Z"
-              fill="#2e8b57"
-            />
-            <path
-              d="M50,20 L50,90 M50,50 L60,40 M50,50 L40,40 M50,60 L60,55 M50,60 L40,55"
-              stroke="#e8f5e9"
-              stroke-width="3"
-              stroke-linecap="round"
-            />
-          </svg>
-        </div>
         <!-- Text Logo - Hidden on small screens -->
-        <span class="brand-text text-success fw-bold">Thamizh Nilam</span>
+        <span
+          class="brand-text text-success fw-bold"
+          style="white-space: nowrap"
+          >Thamizh Nilam <br />
+          Thamizh Pannai</span
+        >
       </div>
     </a>
 
@@ -75,7 +64,7 @@
   <app-hero-video></app-hero-video>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <h1 class="fw-bolder">Welcome to Thamizh Nilam</h1>
+    <h1 class="fw-bolder">Welcome to Thamizh Nilam Thamizh Panni</h1>
     <p class="fw-bolder text-muted">
       Experience the beauty of sustainable farming in Tamil Nadu
     </p>
@@ -924,6 +913,94 @@
                   </button>
                 </div>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Celebrity Testimonial Video Section -->
+<section class="py-5 bg-light celebrity-testimonial-section">
+  <div class="container">
+    <h2 class="text-center text-success mb-5 section-title fw-bolder">
+      Celebrity Testimonial
+    </h2>
+
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card h-100 border-0 shadow-lg overflow-hidden">
+          <div class="position-relative">
+            <!-- Video Container -->
+            <div class="ratio ratio-16x9 bg-dark">
+              <video
+                #celebrityVideo
+                id="celebrityVideo"
+                class="w-100 h-100 object-fit-cover"
+                (click)="toggleMute()"
+                style="object-fit: cover; cursor: pointer"
+              >
+                <source
+                  src="../../../assets/celebrity_speech_1.mp4"
+                  type="video/mp4"
+                />
+                Your browser does not support the video tag.
+              </video>
+            </div>
+
+            <!-- Mute Button Overlay -->
+            <div class="position-absolute top-0 end-0 p-3">
+              <button
+                class="btn btn-success rounded-circle shadow-lg"
+                (click)="toggleMute()"
+                [title]="isMuted ? 'Unmute' : 'Mute'"
+                style="width: 50px; height: 50px; font-size: 20px"
+              >
+                <i
+                  [class]="
+                    isMuted ? 'bi bi-volume-mute-fill' : 'bi bi-volume-up-fill'
+                  "
+                ></i>
+              </button>
+            </div>
+
+            <!-- Play/Pause Button Center -->
+            <div class="position-absolute top-50 start-50 translate-middle">
+              <button
+                class="btn btn-success rounded-circle shadow-lg"
+                (click)="togglePlay()"
+                style="width: 70px; height: 70px; font-size: 30px"
+              >
+                <i
+                  [class]="isPlaying ? 'bi bi-pause-fill' : 'bi bi-play-fill'"
+                ></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- Video Description -->
+          <div class="card-body bg-white">
+            <h5 class="card-title text-success fw-bolder mb-3">
+              Hear from Our Supporters
+            </h5>
+            <p class="card-text text-muted fw-bolder">
+              Listen to what celebrity supporters and influencers have to say
+              about Thamizh Nilam Thamizh Pannai and our sustainable farming
+              initiatives.
+            </p>
+            <div class="d-flex align-items-center gap-2 mt-3">
+              <div class="progress flex-grow-1" style="height: 5px">
+                <div
+                  class="progress-bar bg-success"
+                  role="progressbar"
+                  [style.width.%]="videoProgress"
+                ></div>
+              </div>
+              <small class="text-muted fw-bold"
+                >{{ formatTime(currentTime) }} /
+                {{ formatTime(duration) }}</small
+              >
             </div>
           </div>
         </div>

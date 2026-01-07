@@ -1,5 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, OnInit } from '@angular/core';
+import {
+  Component,
+  HostListener,
+  OnInit,
+  ViewChild,
+  ElementRef,
+} from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { HeroVideoComponent } from '../hero-video/hero-video.component';
 import { FeedbackCombinedCarouselComponent } from '../feedback-combined-carousel/feedback-combined-carousel.component';
@@ -99,6 +105,14 @@ export class HomeComponent implements OnInit {
   activeIndex = 0;
   lightboxActive = false;
 
+  // Celebrity Video Properties
+  @ViewChild('celebrityVideo') videoElement!: ElementRef<HTMLVideoElement>;
+  isMuted = true;
+  isPlaying = false;
+  currentTime = 0;
+  duration = 0;
+  videoProgress = 0;
+
   filterImages(category: string) {
     this.activeFilter = category;
     if (category === 'all') {
@@ -131,6 +145,33 @@ export class HomeComponent implements OnInit {
       this.filteredImages.length;
   }
 
+  // Celebrity Video Methods
+  toggleMute() {
+    if (this.videoElement) {
+      this.videoElement.nativeElement.muted =
+        !this.videoElement.nativeElement.muted;
+      this.isMuted = this.videoElement.nativeElement.muted;
+    }
+  }
+
+  togglePlay() {
+    if (this.videoElement) {
+      if (this.isPlaying) {
+        this.videoElement.nativeElement.pause();
+      } else {
+        this.videoElement.nativeElement.play();
+      }
+      this.isPlaying = !this.isPlaying;
+    }
+  }
+
+  formatTime(seconds: number): string {
+    if (!seconds || isNaN(seconds)) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  }
+
   ngOnInit() {
     fetch('assets/main.mp4')
       .then((res) => console.log('MP4 accessible:', res.ok))
@@ -139,6 +180,31 @@ export class HomeComponent implements OnInit {
     fetch('assets/main_web.webm')
       .then((res) => console.log('WebM accessible:', res.ok))
       .catch((err) => console.error('WebM error:', err));
+
+    // Set up video event listeners
+    setTimeout(() => {
+      if (this.videoElement) {
+        const video = this.videoElement.nativeElement;
+        video.muted = true;
+
+        video.addEventListener('loadedmetadata', () => {
+          this.duration = video.duration;
+        });
+
+        video.addEventListener('timeupdate', () => {
+          this.currentTime = video.currentTime;
+          this.videoProgress = (video.currentTime / video.duration) * 100 || 0;
+        });
+
+        video.addEventListener('play', () => {
+          this.isPlaying = true;
+        });
+
+        video.addEventListener('pause', () => {
+          this.isPlaying = false;
+        });
+      }
+    }, 100);
   }
 
   @HostListener('click', ['$event'])

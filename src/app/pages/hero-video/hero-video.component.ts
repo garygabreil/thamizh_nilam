@@ -19,7 +19,7 @@ export class HeroVideoComponent implements AfterViewInit {
   @ViewChild('heroVideo') heroVideo!: ElementRef<HTMLVideoElement>;
 
   // Input properties for customization
-  @Input() title: string = 'Welcome to Thamizh Nilam';
+  @Input() title: string = 'Welcome to Thamizh Nilam Thamizh Panni';
   @Input() description: string =
     'Experience the beauty of sustainable farming in Tamil Nadu';
   @Input() buttonText: string = 'Explore Our Farm';
