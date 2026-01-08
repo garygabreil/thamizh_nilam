@@ -818,103 +818,104 @@
       </div>
     </div>
 
-    <!-- farm-gallery.component.html -->
-    <div class="container-fluid py-5 bg-light">
-      <!-- Gallery Grid -->
-      <div class="container-fluid py-5 bg-light">
-        <div class="container">
-          <h2 class="text-center text-success fw-bold mb-5 display-5">
-            Farm Gallery
-          </h2>
+    <!-- Elegant Farm Gallery Section -->
+    <div class="gallery-section py-5">
+      <div class="container">
+        <!-- Section Header -->
+        <div class="text-center mb-5 gallery-header">
+          <h2 class="section-title text-success fw-bold">Farm Gallery</h2>
+          <p class="text-muted fw-bold">
+            Explore the beauty of our sustainable farm
+          </p>
+        </div>
 
-          <!-- Filter Controls -->
-          <div class="d-flex justify-content-center flex-wrap mb-5">
-            <button
-              *ngFor="let filter of filters"
-              class="btn btn-outline-success mx-2 mb-2 rounded-pill px-4"
-              [class.active]="activeFilter === filter.value"
-              (click)="filterImages(filter.value)"
-            >
-              {{ filter.label }}
-            </button>
-          </div>
-
-          <!-- Gallery Grid with consistent image sizing -->
-          <div class="row g-4">
-            <div
-              class="col-md-6 col-lg-4 col-xl-3"
-              *ngFor="let image of filteredImages; let i = index"
-            >
-              <div
-                class="card h-100 border-0 shadow-sm overflow-hidden gallery-card"
-                [class.landscape]="image.type === 'landscape'"
-                [class.portrait]="image.type === 'portrait'"
-                (click)="openLightbox(i)"
-              >
-                <div class="image-container">
-                  <img
-                    [src]="image.src"
-                    class="gallery-image"
-                    [alt]="image.alt"
-                    loading="lazy"
-                  />
-                </div>
-                <div class="card-img-overlay d-flex align-items-end p-0">
-                  <div
-                    class="bg-success bg-opacity-75 text-white w-100 py-2 text-center"
-                  >
-                    <span class="fw-bold">{{
-                      image.category | titlecase
-                    }}</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Lightbox Modal -->
-          <div
-            class="modal fade"
-            [class.show]="lightboxActive"
-            [style.display]="lightboxActive ? 'block' : 'none'"
+        <!-- Filter Controls -->
+        <div
+          class="filter-controls d-flex justify-content-center flex-wrap gap-3 mb-5"
+        >
+          <button
+            *ngFor="let filter of filters"
+            class="filter-btn fw-bold"
+            [class.active]="activeFilter === filter.value"
+            (click)="filterImages(filter.value)"
           >
-            <div class="modal-dialog modal-dialog-centered modal-xl">
-              <div class="modal-content border-0 bg-transparent">
-                <div class="modal-header border-0">
-                  <button
-                    type="button"
-                    class="btn-close btn-close-white"
-                    (click)="closeLightbox()"
-                  ></button>
+            {{ filter.label }}
+          </button>
+        </div>
+
+        <!-- Gallery Masonry Grid -->
+        <div class="gallery-grid">
+          <div
+            class="gallery-item"
+            *ngFor="let image of filteredImages; let i = index"
+            (click)="openLightbox(i)"
+          >
+            <div class="gallery-card">
+              <div class="image-wrapper">
+                <img
+                  [src]="image.src"
+                  [alt]="image.alt"
+                  class="gallery-image"
+                  loading="lazy"
+                />
+                <div class="overlay"></div>
+                <div class="icon-overlay">
+                  <i class="bi bi-eye"></i>
                 </div>
-                <div class="modal-body text-center">
-                  <img
-                    [src]="farmImages[activeIndex].src"
-                    class="img-fluid rounded shadow"
-                    [alt]="farmImages[activeIndex].alt"
-                    style="max-height: 70vh; object-fit: contain"
-                  />
-                </div>
-                <div class="modal-footer border-0 justify-content-between">
-                  <button
-                    class="btn btn-success rounded-circle"
-                    (click)="prevImage()"
-                  >
-                    <i class="bi bi-chevron-left"></i>
-                  </button>
-                  <span class="text-white fw-bold"
-                    >{{ activeIndex + 1 }} / {{ farmImages.length }}</span
-                  >
-                  <button
-                    class="btn btn-success rounded-circle"
-                    (click)="nextImage()"
-                  >
-                    <i class="bi bi-chevron-right"></i>
-                  </button>
-                </div>
+              </div>
+              <div class="card-label">
+                <span class="category-badge">{{
+                  image.category | titlecase
+                }}</span>
               </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Elegant Lightbox Modal -->
+    <div
+      class="gallery-lightbox"
+      [class.active]="lightboxActive"
+      (click)="lightboxActive && closeLightbox()"
+    >
+      <div class="lightbox-wrapper" (click)="$event.stopPropagation()">
+        <!-- Close Button -->
+        <button class="lightbox-close" (click)="closeLightbox()">
+          <i class="bi bi-x-lg"></i>
+        </button>
+
+        <!-- Image Container -->
+        <div class="lightbox-container">
+          <img
+            [src]="farmImages[activeIndex].src"
+            [alt]="farmImages[activeIndex].alt"
+            class="lightbox-image"
+          />
+        </div>
+
+        <!-- Navigation Controls -->
+        <div class="lightbox-nav">
+          <button
+            class="nav-btn prev"
+            (click)="prevImage()"
+            [disabled]="activeIndex === 0"
+          >
+            <i class="bi bi-chevron-left"></i>
+          </button>
+
+          <div class="image-counter">
+            <span>{{ activeIndex + 1 }} / {{ farmImages.length }}</span>
+          </div>
+
+          <button
+            class="nav-btn next"
+            (click)="nextImage()"
+            [disabled]="activeIndex === farmImages.length - 1"
+          >
+            <i class="bi bi-chevron-right"></i>
+          </button>
         </div>
       </div>
     </div>
